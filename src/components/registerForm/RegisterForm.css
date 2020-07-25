@@ -1,0 +1,26 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+p.createAccount {
+  text-decoration: underline;
+  font-size: small;
+}
+.validation {
+  font-family: "Roboto", sans-serif;
+  font-size: 11.5px;
+  display: inline;
+}
+.validation p {
+  display: inline;
+  padding-right: 2.5px;
+}
+.validation .true {
+  color: #51a23d;
+}
+.validation .false {
+  color: #d0404b;
+}
+.validation #lowercase {
+  padding-right: 0;
+}
