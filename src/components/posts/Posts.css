@@ -1,0 +1,12 @@
+.posts {
+  width: 400px;
+  margin: 0 auto;
+}
+.posts > h1 {
+  text-align: center;
+}
+.posts > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

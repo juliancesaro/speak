@@ -4,6 +4,7 @@ import Navbar from "./components/navbar/Navbar"
 import Form from "./components/form/Form"
 import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
+import Posts from "./components/posts/Posts"
 
 function App() {
   const [userMessages, setUserMessages] = useState([])
@@ -46,6 +47,7 @@ function App() {
         </Form>
       ) : null}
       <Navbar toggleLoginForm={toggleLoginForm} />
+      <Posts />
     </div>
   )
 }

@@ -1,0 +1,10 @@
+.post {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px lightgrey;
+}
+.post-user {
+  font-weight: bold;
+}
