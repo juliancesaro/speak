@@ -1,0 +1,20 @@
+@media only screen and (min-width: 600px) {
+  .home {
+    width: 500px;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .home {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+.home > h1 {
+  margin-top: 0;
+}
+.home-wrapper {
+  min-height: calc(100vh - 120px);
+  background-color: #f1f1f2;
+  padding: 20px 0;
+}

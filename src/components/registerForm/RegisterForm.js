@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import "./RegisterForm.css";
-import userService from "../../services/users";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Message from "../message/Message";
+import React, { useState } from "react"
+import { withStyles } from "@material-ui/core/styles"
+import "./RegisterForm.css"
+import userService from "../../services/users"
+import IconButton from "@material-ui/core/IconButton"
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
+import OutlinedInput from "@material-ui/core/OutlinedInput"
+import FormControl from "@material-ui/core/FormControl"
+import InputLabel from "@material-ui/core/InputLabel"
+import InputAdornment from "@material-ui/core/InputAdornment"
+import Visibility from "@material-ui/icons/Visibility"
+import VisibilityOff from "@material-ui/icons/VisibilityOff"
+import Message from "../message/Message"
 
 const SuccessTextField = withStyles({
   root: {
@@ -33,7 +33,7 @@ const SuccessTextField = withStyles({
       },
     },
   },
-})(TextField);
+})(TextField)
 
 const SuccessFormControl = withStyles({
   root: {
@@ -55,135 +55,142 @@ const SuccessFormControl = withStyles({
       },
     },
   },
-})(FormControl);
+})(FormControl)
 
 const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
-  const [registerUsername, setRegisterUsername] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [userInputError, setUserInputError] = useState("");
-  const [passwordInputError, setPasswordInputError] = useState(false);
-  const [registerSuccess, setRegisterSuccess] = useState(null);
-  const [messageText, setMessageText] = useState("");
+  const [registerUsername, setRegisterUsername] = useState("")
+  const [registerPassword, setRegisterPassword] = useState("")
+  const [registerAvatar, setRegisterAvatar] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [userInputError, setUserInputError] = useState("")
+  const [passwordInputError, setPasswordInputError] = useState(false)
+  const [registerSuccess, setRegisterSuccess] = useState(null)
+  const [messageText, setMessageText] = useState("")
 
   //password validation
-  const [passwordLen15, setPasswordLen15] = useState(null);
-  const [passwordLowercase, setPasswordLowercase] = useState(null);
-  const [passwordNumber, setPasswordNumber] = useState(null);
-  const [passwordLen8, setPasswordLen8] = useState(null);
-  const [passwordCorrect, setPasswordCorrect] = useState(null);
+  const [passwordLen15, setPasswordLen15] = useState(null)
+  const [passwordLowercase, setPasswordLowercase] = useState(null)
+  const [passwordNumber, setPasswordNumber] = useState(null)
+  const [passwordLen8, setPasswordLen8] = useState(null)
+  const [passwordCorrect, setPasswordCorrect] = useState(null)
 
   const registerUser = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
       if (registerPassword === confirmPassword && passwordCorrect) {
         await userService.create({
           username: registerUsername,
           password: registerPassword,
-        });
-        setRegisterSuccess(true);
-        setMessageText("Account created!");
+          avatar: registerAvatar,
+        })
+        setRegisterSuccess(true)
+        setMessageText("Account created!")
         setTimeout(() => {
-          toggleRegisterLogin();
-        }, 1000);
+          toggleRegisterLogin()
+        }, 1000)
       } else if (!passwordCorrect) {
-        throw new Error("Bad password!");
+        throw new Error("Bad password!")
       } else {
-        throw new Error("Passwords don't match!");
+        throw new Error("Passwords don't match!")
       }
     } catch (error) {
-      setRegisterSuccess(false);
+      setRegisterSuccess(false)
       if (error.message === "Passwords don't match!") {
-        setMessageText(error.message);
+        setMessageText(error.message)
       } else if (error.message === "Bad password!") {
-        setMessageText(error.message);
+        setMessageText(error.message)
       } else if (
         error.response.data.error.includes("is longer than the maximum")
       ) {
-        setMessageText("Username too long!");
+        setMessageText("Username too long!")
       } else if (error.response.data.error.includes("to be unique")) {
-        setMessageText("Username taken!");
+        setMessageText("Username taken!")
       }
     }
-  };
+  }
 
   const handleClickShowRegisterPassword = () => {
-    setShowRegisterPassword(!showRegisterPassword);
-  };
+    setShowRegisterPassword(!showRegisterPassword)
+  }
 
   const handleClickShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+    setShowConfirmPassword(!showConfirmPassword)
+  }
 
   const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+    event.preventDefault()
+  }
 
   const handleRegisterUsernameChange = (event) => {
-    const input = String(event.target.value);
-    setRegisterUsername(input);
+    const input = String(event.target.value)
+    setRegisterUsername(input)
     if (input.length > 10) {
-      setUserInputError("Must be less than 10 characters!");
+      setUserInputError("Must be less than 10 characters!")
     } else {
-      setUserInputError("");
+      setUserInputError("")
     }
-  };
+  }
 
   const handleRegisterPasswordChange = (event) => {
-    const input = String(event.target.value);
-    setRegisterPassword(input);
+    const input = String(event.target.value)
+    setRegisterPassword(input)
     if (input === confirmPassword) {
-      setPasswordInputError(false);
+      setPasswordInputError(false)
     } else {
-      setPasswordInputError(true);
+      setPasswordInputError(true)
     }
     if (input.length >= 15) {
-      setPasswordCorrect(true);
-      setPasswordLen15(true);
-      setPasswordLen8(null);
-      setPasswordNumber(null);
-      setPasswordLowercase(null);
+      setPasswordCorrect(true)
+      setPasswordLen15(true)
+      setPasswordLen8(null)
+      setPasswordNumber(null)
+      setPasswordLowercase(null)
     } else if (input.match(/^(?=.*\d)(?=.*[a-z]).{8,}$/)) {
-      setPasswordCorrect(true);
-      setPasswordLen15(null);
-      setPasswordLen8(true);
-      setPasswordNumber(true);
-      setPasswordLowercase(true);
+      setPasswordCorrect(true)
+      setPasswordLen15(null)
+      setPasswordLen8(true)
+      setPasswordNumber(true)
+      setPasswordLowercase(true)
     } else if (input.length < 15) {
-      setPasswordLen15(false);
+      setPasswordLen15(false)
       if (input.length >= 8) {
-        setPasswordLen8(true);
+        setPasswordLen8(true)
       } else if (input.length < 8) {
-        setPasswordLen8(false);
+        setPasswordLen8(false)
       }
       if (input.match(/\d/)) {
-        setPasswordNumber(true);
+        setPasswordNumber(true)
       } else if (!input.match(/\d/)) {
-        setPasswordNumber(false);
+        setPasswordNumber(false)
       }
       if (input.match(/[a-z]/)) {
-        setPasswordLowercase(true);
+        setPasswordLowercase(true)
       } else if (!input.match(/[a-z]/)) {
-        setPasswordLowercase(false);
+        setPasswordLowercase(false)
       }
     }
-  };
+  }
 
   const handleConfirmPasswordChange = (event) => {
-    const input = String(event.target.value);
-    setConfirmPassword(input);
+    const input = String(event.target.value)
+    setConfirmPassword(input)
     if (registerPassword === input) {
-      setPasswordInputError(false);
+      setPasswordInputError(false)
     } else {
-      setPasswordInputError(true);
+      setPasswordInputError(true)
     }
-  };
+  }
+
+  const handleRegisterAvatarChange = (event) => {
+    const input = String(event.target.value)
+    setRegisterAvatar(input)
+  }
 
   const clickCancel = () => {
-    toggleRegisterForm();
-  };
+    toggleRegisterForm()
+  }
 
   return (
     <div>
@@ -271,6 +278,17 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
                 }}
               />
             </SuccessFormControl>
+            <SuccessTextField
+              id="avatar-register"
+              label="Avatar link"
+              value={registerAvatar}
+              onChange={handleRegisterAvatarChange}
+              variant="outlined"
+              style={{
+                marginBottom: 20,
+                width: 278,
+              }}
+            />
           </div>
         ) : (
           <div>
@@ -386,9 +404,19 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
                 labelWidth={150}
               />
             </FormControl>
+            <TextField
+              id="avatar-register"
+              label="Avatar link"
+              value={registerAvatar}
+              onChange={handleRegisterAvatarChange}
+              variant="outlined"
+              style={{
+                marginBottom: 20,
+                width: 278,
+              }}
+            />
           </div>
         )}
-
         <div className="actions">
           <Button
             variant="contained"
@@ -411,7 +439,7 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default RegisterForm;
+export default RegisterForm

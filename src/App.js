@@ -1,17 +1,40 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./App.css"
+import postService from "./services/posts"
+import userService from "./services/users"
 import Navbar from "./components/navbar/Navbar"
 import Form from "./components/form/Form"
 import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
-import Posts from "./components/posts/Posts"
+import Home from "./components/home/Home"
 
 function App() {
-  const [userMessages, setUserMessages] = useState([])
+  const [posts, setPosts] = useState([])
   const [user, setUser] = useState(null)
+  const [userPosts, setUserPosts] = useState(null)
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [showRegisterForm, setShowRegisterForm] = useState(false)
-  const [showMessageForm, setShowMessageForm] = useState(false)
+
+  useEffect(() => {
+    postService.getAll().then((initialPosts) => {
+      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
+      setPosts(initialPosts)
+    })
+    const loggedUserJSON = window.localStorage.getItem("loggedShareitUser")
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      postService.setToken(user.token)
+      userService.setToken(user.token)
+    }
+    const loggedUserPostsJSON = window.localStorage.getItem(
+      "loggedShareitUserPosts"
+    )
+    if (loggedUserPostsJSON) {
+      const userPosts = JSON.parse(loggedUserPostsJSON)
+      setUserPosts(userPosts)
+    }
+  }, [])
 
   const toggleLoginForm = () => {
     setShowLoginForm(!showLoginForm)
@@ -34,7 +57,7 @@ function App() {
             toggleLoginForm={toggleLoginForm}
             toggleRegisterLogin={toggleRegisterLogin}
             setUser={setUser}
-            setUserMessages={setUserMessages}
+            setUserPosts={setUserPosts}
           />
         </Form>
       ) : null}
@@ -46,8 +69,19 @@ function App() {
           />
         </Form>
       ) : null}
-      <Navbar toggleLoginForm={toggleLoginForm} />
-      <Posts />
+      <Navbar
+        toggleLoginForm={toggleLoginForm}
+        user={user}
+        setUser={setUser}
+        setUserPosts={setUserPosts}
+      />
+      <Home
+        user={user}
+        setPosts={setPosts}
+        setUserPosts={setUserPosts}
+        posts={posts}
+        userPosts={userPosts}
+      />
     </div>
   )
 }

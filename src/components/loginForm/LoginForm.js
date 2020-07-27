@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
 import "./LoginForm.css"
 import loginService from "../../services/login"
-import messageService from "../../services/messages"
+import messageService from "../../services/posts"
 import userService from "../../services/users"
 import IconButton from "@material-ui/core/IconButton"
 import Button from "@material-ui/core/Button"
@@ -63,7 +63,7 @@ const LoginForm = ({
   toggleLoginForm,
   toggleRegisterLogin,
   setUser,
-  setUserMessages,
+  setUserPosts,
 }) => {
   const [loginUsername, setLoginUsername] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
@@ -78,15 +78,15 @@ const LoginForm = ({
         username: loginUsername,
         password: loginPassword,
       })
-      window.localStorage.setItem("loggedGOshopUser", JSON.stringify(user))
+      window.localStorage.setItem("loggedShareitUser", JSON.stringify(user))
       window.localStorage.setItem(
-        "loggedGOshopUserItems",
-        JSON.stringify(user.items)
+        "loggedShareitUserPosts",
+        JSON.stringify(user.posts)
       )
       messageService.setToken(user.token)
       userService.setToken(user.token)
       setUser(user)
-      setUserMessages(user.messages)
+      setUserPosts(user.posts)
       setLoginSuccess(true)
       setMessageText("Login Successful!")
       setTimeout(() => {

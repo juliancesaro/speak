@@ -1,0 +1,14 @@
+.postform-items {
+  display: flex;
+  margin-bottom: 20px;
+}
+.postform-right {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+}
+.postform-content {
+  display: flex;
+  align-items: center;
+  width: 95%;
+}

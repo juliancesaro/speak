@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseUrl = "/api/messages"
+const baseUrl = "/api/posts"
 
 let token = null
 

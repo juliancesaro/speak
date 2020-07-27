@@ -4,19 +4,29 @@
   justify-content: center;
   height: 80px;
 }
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1000px;
-  color: white;
-}
 .nav-left {
-  margin-left: 100px;
   cursor: pointer;
 }
 .nav-right {
-  margin-right: 100px;
   cursor: pointer;
+}
+@media only screen and (min-width: 600px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+    max-width: 1000px;
+    color: white;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1000px;
+    color: white;
+  }
 }

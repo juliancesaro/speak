@@ -1,16 +1,18 @@
 import React from "react"
 import "./Posts.css"
-import data from "../../data/sampledata.json"
 import Post from "../post/Post"
 
-const Posts = () => {
+const Posts = ({ posts }) => {
   return (
     <div className="posts">
-      <h1>Posts</h1>
       <ul>
-        {data.posts.map((post) => (
+        {posts.map((post) => (
           <li key={post.id}>
-            <Post user={post.user} content={post.content} />
+            <Post
+              username={post.user.username}
+              avatar={post.user.avatar}
+              content={post.content}
+            />
           </li>
         ))}
       </ul>
