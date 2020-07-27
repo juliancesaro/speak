@@ -11,7 +11,8 @@ import Home from "./components/home/Home"
 function App() {
   const [posts, setPosts] = useState([])
   const [user, setUser] = useState(null)
-  const [userPosts, setUserPosts] = useState(null)
+  const [userPosts, setUserPosts] = useState([])
+  const [userLikes, setUserLikes] = useState([])
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [showRegisterForm, setShowRegisterForm] = useState(false)
 
@@ -26,6 +27,7 @@ function App() {
       setUser(user)
       postService.setToken(user.token)
       userService.setToken(user.token)
+      setUserLikes(user.likedPosts)
     }
     const loggedUserPostsJSON = window.localStorage.getItem(
       "loggedShareitUserPosts"
@@ -58,6 +60,7 @@ function App() {
             toggleRegisterLogin={toggleRegisterLogin}
             setUser={setUser}
             setUserPosts={setUserPosts}
+            setUserLikes={setUserLikes}
           />
         </Form>
       ) : null}
@@ -73,14 +76,18 @@ function App() {
         toggleLoginForm={toggleLoginForm}
         user={user}
         setUser={setUser}
+        setUserLikes={setUserLikes}
         setUserPosts={setUserPosts}
       />
       <Home
         user={user}
-        setPosts={setPosts}
-        setUserPosts={setUserPosts}
+        setUser={setUser}
+        userLikes={userLikes}
+        setUserLikes={setUserLikes}
         posts={posts}
+        setPosts={setPosts}
         userPosts={userPosts}
+        setUserPosts={setUserPosts}
       />
     </div>
   )

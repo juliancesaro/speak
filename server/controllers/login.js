@@ -34,6 +34,7 @@ loginRouter.post("/", async (request, response) => {
     username: user.username,
     avatar: user.avatar,
     posts: user.posts,
+    likedPosts: user.likedPosts,
     follows: user.follows,
     followers: user.followers,
   })

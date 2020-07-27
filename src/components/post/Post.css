@@ -11,7 +11,13 @@
   padding: 20px;
 }
 .post-right {
+  display: flex;
+  align-items: flex-start;
   padding: 10px;
+}
+.likes-num {
+  margin-top: 11px;
+  font-size: 14px;
 }
 .post-user-image {
   margin-right: 10px;

@@ -3,7 +3,16 @@ import "./Home.css"
 import PostForm from "../postForm/PostForm"
 import Posts from "../posts/Posts"
 
-const Home = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
+const Home = ({
+  user,
+  setUser,
+  userLikes,
+  setUserLikes,
+  posts,
+  setPosts,
+  userPosts,
+  setUserPosts,
+}) => {
   return (
     <div className="home-wrapper">
       <div className="home">
@@ -17,7 +26,14 @@ const Home = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
             userPosts={userPosts}
           />
         ) : null}
-        <Posts posts={posts} />
+        <Posts
+          user={user}
+          setUser={setUser}
+          userLikes={userLikes}
+          setUserLikes={setUserLikes}
+          setPosts={setPosts}
+          posts={posts}
+        />
       </div>
     </div>
   )

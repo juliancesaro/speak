@@ -48,13 +48,13 @@ postsRouter.put("/:id", async (request, response, next) => {
   const body = request.body
 
   const post = {
-    content: body.content,
+    likes: body.likes,
   }
 
   try {
     const updatedPost = await Post.findByIdAndUpdate(request.params.id, post, {
       new: true,
-    })
+    }).populate("user", { username: 1, avatar: 1 })
     response.json(updatedPost.toJSON())
   } catch (exception) {
     next(exception)

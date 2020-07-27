@@ -64,6 +64,7 @@ const LoginForm = ({
   toggleRegisterLogin,
   setUser,
   setUserPosts,
+  setUserLikes,
 }) => {
   const [loginUsername, setLoginUsername] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
@@ -87,6 +88,7 @@ const LoginForm = ({
       userService.setToken(user.token)
       setUser(user)
       setUserPosts(user.posts)
+      setUserLikes(user.likedPosts)
       setLoginSuccess(true)
       setMessageText("Login Successful!")
       setTimeout(() => {

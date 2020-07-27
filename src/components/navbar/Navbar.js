@@ -4,7 +4,13 @@ import postService from "../../services/posts"
 import userService from "../../services/users"
 import HomeIcon from "@material-ui/icons/Home"
 
-const Navbar = ({ toggleLoginForm, user, setUser, setUserPosts }) => {
+const Navbar = ({
+  toggleLoginForm,
+  user,
+  setUser,
+  setUserLikes,
+  setUserPosts,
+}) => {
   const handleLogout = async () => {
     try {
       postService.clearToken()
@@ -16,6 +22,7 @@ const Navbar = ({ toggleLoginForm, user, setUser, setUserPosts }) => {
     window.localStorage.removeItem("loggedShareitUserPosts")
     setUser(null)
     setUserPosts([])
+    setUserLikes([])
   }
 
   return (

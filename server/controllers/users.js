@@ -46,4 +46,21 @@ usersRouter.delete("/:id", async (request, response) => {
   response.status(204).end()
 })
 
+usersRouter.put("/:id", async (request, response, next) => {
+  const body = request.body
+
+  const user = {
+    likedPosts: body.likedPosts,
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
+      new: true,
+    }).populate("posts", { content: 1, date: 1 })
+    response.json(updatedUser.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
+})
+
 module.exports = usersRouter
