@@ -6,6 +6,10 @@ import IconButton from "@material-ui/core/IconButton"
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 
+/**
+ * Post component consisting of user information, post content,
+ * and a 'like' button.
+ */
 const Post = ({
   user,
   setUser,
@@ -19,10 +23,13 @@ const Post = ({
   content,
   likes,
 }) => {
+  // State to determine whether current post has been liked by logged in user.
   const [likedByUser, setLikedByUser] = useState(
     userLikes.some((userLike) => userLike === post.id)
   )
 
+  // Request is sent to add user to post 'likes' field and post to
+  // user 'likedPosts' field.
   const likePost = async () => {
     try {
       const returnedPost = await postService.update(post.id, {

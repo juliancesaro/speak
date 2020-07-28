@@ -2,6 +2,9 @@ import React from "react"
 import "./Posts.css"
 import Post from "../post/Post"
 
+/**
+ * Component maps posts list to a separate Post component.
+ */
 const Posts = ({ user, setUser, userLikes, setUserLikes, posts, setPosts }) => {
   return (
     <div className="posts">

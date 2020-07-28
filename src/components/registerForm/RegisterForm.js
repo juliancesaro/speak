@@ -13,6 +13,9 @@ import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
 import Message from "../message/Message"
 
+/**
+ * Custom styling for MaterialUI TextField on success.
+ */
 const SuccessTextField = withStyles({
   root: {
     "& label": {
@@ -35,6 +38,9 @@ const SuccessTextField = withStyles({
   },
 })(TextField)
 
+/**
+ * Custom styling for MaterialUI FormControl on success (password fields).
+ */
 const SuccessFormControl = withStyles({
   root: {
     "& label": {
@@ -57,25 +63,33 @@ const SuccessFormControl = withStyles({
   },
 })(FormControl)
 
+/**
+ * Form for registering new users with password validation.
+ */
 const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
+  //States for input fields.
   const [registerUsername, setRegisterUsername] = useState("")
   const [registerPassword, setRegisterPassword] = useState("")
   const [registerAvatar, setRegisterAvatar] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+
   const [showRegisterPassword, setShowRegisterPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  // States for error handling.
   const [userInputError, setUserInputError] = useState("")
   const [passwordInputError, setPasswordInputError] = useState(false)
   const [registerSuccess, setRegisterSuccess] = useState(null)
   const [messageText, setMessageText] = useState("")
 
-  //password validation
+  // States for password validation.
   const [passwordLen15, setPasswordLen15] = useState(null)
   const [passwordLowercase, setPasswordLowercase] = useState(null)
   const [passwordNumber, setPasswordNumber] = useState(null)
   const [passwordLen8, setPasswordLen8] = useState(null)
   const [passwordCorrect, setPasswordCorrect] = useState(null)
 
+  // Makes request to the server to register user.
   const registerUser = async (event) => {
     event.preventDefault()
     try {
@@ -133,6 +147,7 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
     }
   }
 
+  // Function for checking the input of password and setting states accordingly.
   const handleRegisterPasswordChange = (event) => {
     const input = String(event.target.value)
     setRegisterPassword(input)

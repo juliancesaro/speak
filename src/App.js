@@ -8,7 +8,10 @@ import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
 import Home from "./components/home/Home"
 
-function App() {
+/**
+ * Main component containing the structure of the app.
+ */
+const App = () => {
   const [posts, setPosts] = useState([])
   const [user, setUser] = useState(null)
   const [userPosts, setUserPosts] = useState([])
@@ -16,6 +19,8 @@ function App() {
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [showRegisterForm, setShowRegisterForm] = useState(false)
 
+  // On app load, set posts state to returned posts from the server,
+  // and check browser local storage for data and set states accordingly.
   useEffect(() => {
     postService.getAll().then((initialPosts) => {
       initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))

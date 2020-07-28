@@ -15,6 +15,9 @@ import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
 import Message from "../message/Message"
 
+/**
+ * Styling for TextFields on success.
+ */
 const SuccessTextField = withStyles({
   root: {
     "& label": {
@@ -37,6 +40,9 @@ const SuccessTextField = withStyles({
   },
 })(TextField)
 
+/**
+ * Styling for FormControls on success (password field).
+ */
 const SuccessFormControl = withStyles({
   root: {
     "& label": {
@@ -59,6 +65,9 @@ const SuccessFormControl = withStyles({
   },
 })(FormControl)
 
+/**
+ * Form handling user login, with input fields and register link
+ */
 const LoginForm = ({
   toggleLoginForm,
   toggleRegisterLogin,
@@ -66,12 +75,18 @@ const LoginForm = ({
   setUserPosts,
   setUserLikes,
 }) => {
+  // States for input fields
   const [loginUsername, setLoginUsername] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
+
+  // States for error handling
   const [loginSuccess, setLoginSuccess] = useState(null)
   const [messageText, setMessageText] = useState("")
 
+  const [showPassword, setShowPassword] = useState(false)
+
+  // Sends login request to the server using 'loginService'
+  // Response is stored in local storage and states are changed
   const handleLogin = async (event) => {
     event.preventDefault()
     try {

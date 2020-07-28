@@ -5,12 +5,19 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import Message from "../message/Message"
 
+/**
+ * Form handling post posting including user avatar.
+ */
 const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
+  // State for input fields.
   const [newContent, setNewContent] = useState("")
+
+  // States for error handling.
   const [addItemSuccess, setAddItemSuccess] = useState(null)
   const [contentInputError, setContentInputError] = useState("")
   const [messageText, setMessageText] = useState("")
 
+  // If no input error, request is sent to the server to post form input
   const addItem = async (event) => {
     event.preventDefault()
     try {

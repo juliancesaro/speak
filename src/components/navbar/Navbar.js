@@ -4,6 +4,9 @@ import postService from "../../services/posts"
 import userService from "../../services/users"
 import HomeIcon from "@material-ui/icons/Home"
 
+/**
+ * Navbar containing NavLinks and login/logout buttons
+ */
 const Navbar = ({
   toggleLoginForm,
   user,
@@ -11,6 +14,7 @@ const Navbar = ({
   setUserLikes,
   setUserPosts,
 }) => {
+  // Logs out user by clearing tokens, states, and browser local storage
   const handleLogout = async () => {
     try {
       postService.clearToken()
@@ -20,9 +24,9 @@ const Navbar = ({
     }
     window.localStorage.removeItem("loggedShareitUser")
     window.localStorage.removeItem("loggedShareitUserPosts")
+    setUserLikes([])
     setUser(null)
     setUserPosts([])
-    setUserLikes([])
   }
 
   return (

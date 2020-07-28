@@ -3,6 +3,9 @@ import "./Home.css"
 import PostForm from "../postForm/PostForm"
 import Posts from "../posts/Posts"
 
+/**
+ * Contains PostForm and a list of Posts.
+ */
 const Home = ({
   user,
   setUser,

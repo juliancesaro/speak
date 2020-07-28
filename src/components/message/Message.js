@@ -1,6 +1,9 @@
 import React from "react"
 import "./Message.css"
 
+/**
+ * Small error/success message
+ */
 const Message = ({ type, message }) => {
   return (
     <div className="message">
