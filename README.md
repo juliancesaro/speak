@@ -1,5 +1,7 @@
 # COMP3120 Social Media Project
 
+Live demo here: https://lit-beyond-07329.herokuapp.com/
+
 An individual project for COMP3120 Advanced Web Devleopment
 
 The project should implement a micro-blog similar to Twitter that supports at least:
