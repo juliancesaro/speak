@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./Post.css"
 import postService from "../../services/posts"
 import userService from "../../services/users"
@@ -27,6 +27,12 @@ const Post = ({
   const [likedByUser, setLikedByUser] = useState(
     userLikes.some((userLike) => userLike === post.id)
   )
+
+  // Ensures likedByUser state updates immediately after userLikes state
+  // changes (login, logout).
+  useEffect(() => {
+    setLikedByUser(userLikes.some((userLike) => userLike === post.id))
+  }, [userLikes, likedByUser, post.id])
 
   // Request is sent to add user to post 'likes' field and post to
   // user 'likedPosts' field.

@@ -15,18 +15,18 @@ const Navbar = ({
   setUserPosts,
 }) => {
   // Logs out user by clearing tokens, states, and browser local storage
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
       postService.clearToken()
       userService.clearToken()
+      window.localStorage.removeItem("loggedShareitUser")
+      window.localStorage.removeItem("loggedShareitUserPosts")
+      setUserLikes([])
+      setUser(null)
+      setUserPosts([])
     } catch (exception) {
       console.log(exception)
     }
-    window.localStorage.removeItem("loggedShareitUser")
-    window.localStorage.removeItem("loggedShareitUserPosts")
-    setUserLikes([])
-    setUser(null)
-    setUserPosts([])
   }
 
   return (

@@ -66,7 +66,7 @@ const SuccessFormControl = withStyles({
 })(FormControl)
 
 /**
- * Form handling user login, with input fields and register link
+ * Form handling user login, with input fields and register link.
  */
 const LoginForm = ({
   toggleLoginForm,
