@@ -1,0 +1,29 @@
+@media only screen and (min-width: 600px) {
+  .user {
+    width: 500px;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .user {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+.user-wrapper {
+  min-height: calc(100vh - 120px);
+  background-color: #f1f1f2;
+  padding: 20px 0;
+}
+.user-info > img {
+  border-radius: 50%;
+}
+.user-info > h2 {
+  margin-bottom: 0;
+}
+.user-follow-items {
+  display: flex;
+}
+.user-following {
+  margin-right: 20px;
+}

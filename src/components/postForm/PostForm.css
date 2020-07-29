@@ -12,3 +12,10 @@
   align-items: center;
   width: 95%;
 }
+.user-image {
+  margin-right: 5px;
+}
+.user-image > img {
+  display: block;
+  border-radius: 50%;
+}

@@ -117,8 +117,9 @@ const Post = ({
     <div className="post">
       <div className="post-left">
         <div className="post-user-image">
-          <NavLink exact to={`/user/${username}`}>
+          <NavLink exact className="userimglink" to={`/user/${username}`}>
             <img src={avatar} alt={`${username}-avatar`} width="50px" />
+            <div className="overlay"></div>
           </NavLink>
         </div>
         <div className="post-text">

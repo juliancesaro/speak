@@ -38,7 +38,7 @@ const Navbar = ({
             exact
             className="navlink"
             activeClassName="activeNavlink"
-            to="/"
+            to="/home"
           >
             <HomeIcon fontSize="large" />
           </NavLink>

@@ -73,7 +73,7 @@ const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
       ) : null}
       <form onSubmit={addItem}>
         <div className="postform-items">
-          <div className="post-user-image">
+          <div className="user-image">
             <img
               src={user.avatar}
               alt={`${user.username}-avatar`}
