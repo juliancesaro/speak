@@ -97,7 +97,7 @@ const App = () => {
               <User user={user} />
             </Route>
           ))}
-          <Route path="/home">
+          <Route path="/">
             <Home
               user={user}
               setUser={setUser}

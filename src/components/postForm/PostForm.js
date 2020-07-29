@@ -33,7 +33,7 @@ const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
             .sort((a, b) => new Date(b.date) - new Date(a.date))
         )
         window.localStorage.setItem(
-          "loggedShareitUserItems",
+          "loggedShareitUserPosts",
           JSON.stringify(userPosts.concat(returnedItem))
         )
         setNewContent("")
