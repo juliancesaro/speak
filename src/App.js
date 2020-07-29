@@ -15,7 +15,7 @@ import User from "./components/user/User"
  */
 const App = () => {
   const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([])
+  const [allUsers, setAllUsers] = useState([])
   const [user, setUser] = useState(null)
   const [userPosts, setUserPosts] = useState([])
   const [userLikes, setUserLikes] = useState([])
@@ -29,8 +29,8 @@ const App = () => {
       initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
       setPosts(initialPosts)
     })
-    userService.getAll().then((users) => {
-      setUsers(users)
+    userService.getAll().then((allUsers) => {
+      setAllUsers(allUsers)
     })
     const loggedUserJSON = window.localStorage.getItem("loggedShareitUser")
     if (loggedUserJSON) {
@@ -92,9 +92,16 @@ const App = () => {
           setUserPosts={setUserPosts}
         />
         <Switch>
-          {users.map((user) => (
-            <Route key={user.username} path={`/user/${user.username}`}>
-              <User user={user} />
+          {allUsers.map((allUser) => (
+            <Route key={allUser.username} path={`/user/${allUser.username}`}>
+              <User
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
+                user={user}
+                setUser={setUser}
+                userAccount={allUser}
+                toggleLoginForm={toggleLoginForm}
+              />
             </Route>
           ))}
           <Route path="/">

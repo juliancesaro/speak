@@ -23,6 +23,11 @@
 }
 .user-follow-items {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user-follow-left {
+  display: flex;
 }
 .user-following {
   margin-right: 20px;

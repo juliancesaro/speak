@@ -46,11 +46,45 @@ usersRouter.delete("/:id", async (request, response) => {
   response.status(204).end()
 })
 
-usersRouter.put("/:id", async (request, response, next) => {
+usersRouter.put("/likedPosts/:id", async (request, response, next) => {
   const body = request.body
 
   const user = {
     likedPosts: body.likedPosts,
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
+      new: true,
+    }).populate("posts", { content: 1, date: 1 })
+    response.json(updatedUser.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
+})
+
+usersRouter.put("/follows/:id", async (request, response, next) => {
+  const body = request.body
+
+  const user = {
+    follows: body.follows,
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
+      new: true,
+    }).populate("posts", { content: 1, date: 1 })
+    response.json(updatedUser.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
+})
+
+usersRouter.put("/followers/:id", async (request, response, next) => {
+  const body = request.body
+
+  const user = {
+    followers: body.followers,
   }
 
   try {

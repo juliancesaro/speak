@@ -21,11 +21,39 @@ const create = async (newUser) => {
   return response.data
 }
 
-const update = async (id, updatedUser) => {
+const updateLikedPosts = async (id, updatedUser) => {
   const config = {
     headers: { Authorization: token },
   }
-  const response = await axios.put(`${baseUrl}/${id}`, updatedUser, config)
+  const response = await axios.put(
+    `${baseUrl}/likedPosts/${id}`,
+    updatedUser,
+    config
+  )
+  return response.data
+}
+
+const updateFollows = async (id, updatedUser) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.put(
+    `${baseUrl}/follows/${id}`,
+    updatedUser,
+    config
+  )
+  return response.data
+}
+
+const updateFollowers = async (id, updatedUser) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.put(
+    `${baseUrl}/followers/${id}`,
+    updatedUser,
+    config
+  )
   return response.data
 }
 
@@ -37,4 +65,13 @@ const deleteUser = (id) => {
   return request.then((response) => response.data)
 }
 
-export default { getAll, create, update, setToken, clearToken, deleteUser }
+export default {
+  getAll,
+  create,
+  updateLikedPosts,
+  updateFollows,
+  updateFollowers,
+  setToken,
+  clearToken,
+  deleteUser,
+}

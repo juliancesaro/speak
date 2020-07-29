@@ -82,7 +82,7 @@ const Post = ({
       await postService.update(post.id, {
         likes: likes.concat(user.id),
       })
-      const returnedUser = await userService.update(user.id, {
+      const returnedUser = await userService.updateLikedPosts(user.id, {
         likedPosts: user.likedPosts.concat(post.id),
       })
       window.localStorage.setItem(
@@ -113,7 +113,7 @@ const Post = ({
       await postService.update(post.id, {
         likes: likes.filter((like) => like !== user.id),
       })
-      const returnedUser = await userService.update(user.id, {
+      const returnedUser = await userService.updateLikedPosts(user.id, {
         likedPosts: user.likedPosts.filter(
           (likedPost) => likedPost !== post.id
         ),
