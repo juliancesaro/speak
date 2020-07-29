@@ -1,5 +1,6 @@
 import React from "react"
 import "./User.css"
+import blank_user from "../../assets/blank_user.png"
 
 const User = ({ user }) => {
   return (
@@ -8,7 +9,7 @@ const User = ({ user }) => {
         {user ? (
           <div className="user-info">
             <img
-              src={user.avatar}
+              src={user.avatar ? user.avatar : blank_user}
               alt={`${user.username}-avatar`}
               width="100px"
             />

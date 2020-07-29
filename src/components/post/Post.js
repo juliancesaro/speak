@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton"
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
+import blank_user from "../../assets/blank_user.png"
 
 /**
  * Post component consisting of user information, post content,
@@ -145,7 +146,11 @@ const Post = ({
       <div className="post-left">
         <div className="post-user-image">
           <NavLink exact className="userimglink" to={`/user/${username}`}>
-            <img src={avatar} alt={`${username}-avatar`} width="50px" />
+            <img
+              src={avatar ? avatar : blank_user}
+              alt={`${username}-avatar`}
+              width="50px"
+            />
           </NavLink>
         </div>
         <div className="post-text">
