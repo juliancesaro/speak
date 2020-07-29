@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./User.css"
 import userService from "../../services/users"
-import postService from "../../services/posts"
 import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
 import UserItems from "../userItems/UserItems"
@@ -20,19 +19,7 @@ const User = ({
   userAccount,
   toggleLoginForm,
 }) => {
-  const [userAccountPosts, setUserAccountPosts] = useState(
-    posts.filter((post) =>
-      userAccount.posts.some((userPost) => userPost.id === post.id)
-    )
-  )
   const [followingBtnHover, setFollowingBtnHover] = useState(false)
-
-  useEffect(() => {
-    postService.getAll().then((initialPosts) => {
-      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-      setPosts(initialPosts)
-    })
-  }, [userAccountPosts])
 
   const followUser = async () => {
     try {
@@ -153,10 +140,11 @@ const User = ({
         <UserItems
           user={user}
           setUser={setUser}
+          userAccount={userAccount}
           userLikes={userLikes}
           setUserLikes={setUserLikes}
-          setPosts={setUserAccountPosts}
-          posts={userAccountPosts}
+          setPosts={setPosts}
+          posts={posts}
           userPosts={userPosts}
           setUserPosts={setUserPosts}
           toggleLoginForm={toggleLoginForm}

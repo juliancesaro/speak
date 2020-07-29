@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "./UserItems.css"
+import postService from "../../services/posts"
 import Posts from "../posts/Posts"
 
 const UserItems = ({
   user,
   setUser,
+  userAccount,
   userLikes,
   setUserLikes,
   posts,
@@ -13,18 +15,85 @@ const UserItems = ({
   setUserPosts,
   toggleLoginForm,
 }) => {
+  const [userAccountPosts, setUserAccountPosts] = useState(
+    posts.filter((post) =>
+      userAccount.posts.some((userPost) => userPost.id === post.id)
+    )
+  )
+  const [userAccountLikedPosts, setUserAccountLikedPosts] = useState(
+    posts.filter((post) =>
+      userAccount.likedPosts.some((userLikedPost) => userLikedPost === post.id)
+    )
+  )
+  const [activeUserItem, setActiveUserItem] = useState("Posts")
+
+  // If a post is liked in user view, update the posts on the home page
+  useEffect(() => {
+    postService.getAll().then((initialPosts) => {
+      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
+      setPosts(initialPosts)
+    })
+  }, [userAccountLikedPosts, userAccountPosts, setPosts])
+
+  useEffect(() => {
+    postService.getAll().then((initialPosts) => {
+      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
+      setPosts(initialPosts)
+    })
+  }, [userAccountLikedPosts, setPosts])
+
+  const setLikesActive = () => {
+    setActiveUserItem("Likes")
+  }
+  const setPostsActive = () => {
+    setActiveUserItem("Posts")
+  }
   return (
-    <Posts
-      user={user}
-      setUser={setUser}
-      userLikes={userLikes}
-      setUserLikes={setUserLikes}
-      setPosts={setPosts}
-      posts={posts}
-      userPosts={userPosts}
-      setUserPosts={setUserPosts}
-      toggleLoginForm={toggleLoginForm}
-    />
+    <div className="useritems">
+      <div className="user-nav">
+        <div
+          className={`user-nav-posts${
+            activeUserItem === "Posts" ? " active" : ""
+          }`}
+          onClick={setPostsActive}
+        >
+          <p>Posts</p>
+        </div>
+        <div
+          className={`user-nav-likes${
+            activeUserItem === "Likes" ? " active" : ""
+          }`}
+          onClick={setLikesActive}
+        >
+          <p>Likes</p>
+        </div>
+      </div>
+      {activeUserItem === "Posts" ? (
+        <Posts
+          user={user}
+          setUser={setUser}
+          userLikes={userLikes}
+          setUserLikes={setUserLikes}
+          setPosts={setUserAccountPosts}
+          posts={userAccountPosts}
+          userPosts={userPosts}
+          setUserPosts={setUserPosts}
+          toggleLoginForm={toggleLoginForm}
+        />
+      ) : (
+        <Posts
+          user={user}
+          setUser={setUser}
+          userLikes={userLikes}
+          setUserLikes={setUserLikes}
+          setPosts={setUserAccountLikedPosts}
+          posts={userAccountLikedPosts}
+          userPosts={userPosts}
+          setUserPosts={setUserPosts}
+          toggleLoginForm={toggleLoginForm}
+        />
+      )}
+    </div>
   )
 }
 

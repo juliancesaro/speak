@@ -77,7 +77,6 @@ const Post = ({
       const updatedPosts = posts
         .filter((oldPost) => oldPost.id !== post.id)
         .concat(newPost)
-
       setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
       // Server requests.
       await postService.update(post.id, {

@@ -1,0 +1,36 @@
+.user-nav {
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.user-nav-posts {
+  text-align: center;
+  width: 50%;
+  cursor: pointer;
+  opacity: 1;
+  transition: background-color 0.2s ease;
+}
+.user-nav-likes {
+  text-align: center;
+  width: 50%;
+  cursor: pointer;
+  opacity: 1;
+  transition: background-color 0.2s ease;
+}
+.user-nav-posts:hover {
+  background-color: rgba(135, 206, 250, 0.5);
+}
+.user-nav-likes:hover {
+  background-color: rgba(135, 206, 250, 0.5);
+}
+.user-nav-posts.active {
+  text-align: center;
+  width: 50%;
+  border-bottom: 2px solid lightskyblue;
+}
+.user-nav-likes.active {
+  text-align: center;
+  width: 50%;
+  border-bottom: 2px solid lightskyblue;
+}
