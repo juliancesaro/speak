@@ -88,12 +88,6 @@ const Post = ({
         "loggedShareitUser",
         JSON.stringify(returnedUser)
       )
-      window.localStorage.setItem(
-        "loggedShareitUserPosts",
-        JSON.stringify(
-          updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-        )
-      )
       setUser(returnedUser)
       setLikedByUser(true)
     } catch (error) {
@@ -126,12 +120,6 @@ const Post = ({
       window.localStorage.setItem(
         "loggedShareitUser",
         JSON.stringify(returnedUser)
-      )
-      window.localStorage.setItem(
-        "loggedShareitUserPosts",
-        JSON.stringify(
-          updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-        )
       )
       setUser(returnedUser)
       setLikedByUser(true)
