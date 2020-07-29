@@ -12,6 +12,8 @@ const Posts = ({
   setUserLikes,
   posts,
   setPosts,
+  userPosts,
+  setUserPosts,
   toggleLoginForm,
 }) => {
   return (
@@ -27,10 +29,8 @@ const Posts = ({
               posts={posts}
               setPosts={setPosts}
               post={post}
-              username={post.user.username}
-              avatar={post.user.avatar}
-              content={post.content}
-              likes={post.likes}
+              userPosts={userPosts}
+              setUserPosts={setUserPosts}
               toggleLoginForm={toggleLoginForm}
             />
           </li>

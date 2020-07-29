@@ -13,6 +13,7 @@
 .post-right {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 12px 10px 20px 10px;
 }
 .likes-num {
@@ -32,6 +33,9 @@
 }
 .post-content {
   margin-bottom: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 .userlink {
   text-decoration: none;

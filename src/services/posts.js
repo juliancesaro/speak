@@ -29,7 +29,7 @@ const update = (id, newObject) => {
   return request.then((response) => response.data)
 }
 
-const deleteMessage = (id) => {
+const deletePost = (id) => {
   const config = {
     headers: { Authorization: token },
   }
@@ -37,4 +37,4 @@ const deleteMessage = (id) => {
   return request.then((response) => response.data)
 }
 
-export default { getAll, create, update, deleteMessage, setToken, clearToken }
+export default { getAll, create, update, deletePost, setToken, clearToken }

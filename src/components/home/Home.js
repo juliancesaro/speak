@@ -37,6 +37,8 @@ const Home = ({
           setUserLikes={setUserLikes}
           setPosts={setPosts}
           posts={posts}
+          userPosts={userPosts}
+          setUserPosts={setUserPosts}
           toggleLoginForm={toggleLoginForm}
         />
       </div>

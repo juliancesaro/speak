@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import "./PostForm.css"
+import { NavLink } from "react-router-dom"
 import postService from "../../services/posts"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
@@ -74,11 +75,18 @@ const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
       <form onSubmit={addItem}>
         <div className="postform-items">
           <div className="user-image">
-            <img
-              src={user.avatar}
-              alt={`${user.username}-avatar`}
-              width="50px"
-            />
+            <NavLink
+              exact
+              className="userimglink"
+              to={`/user/${user.username}`}
+            >
+              <img
+                src={user.avatar}
+                alt={`${user.username}-avatar`}
+                width="50px"
+              />
+              <div className="overlay"></div>
+            </NavLink>
           </div>
           <div className="postform-right">
             <div className="postform-content">

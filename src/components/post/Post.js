@@ -6,6 +6,7 @@ import userService from "../../services/users"
 import IconButton from "@material-ui/core/IconButton"
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 /**
  * Post component consisting of user information, post content,
@@ -19,12 +20,12 @@ const Post = ({
   posts,
   setPosts,
   post,
-  username,
-  avatar,
-  content,
-  likes,
+  userPosts,
+  setUserPosts,
   toggleLoginForm,
 }) => {
+  const { content, likes } = post
+  const { username, avatar } = post.user
   // State to determine whether current post has been liked by logged in user.
   const [likedByUser, setLikedByUser] = useState(
     userLikes.some((userLike) => userLike === post.id)
@@ -64,8 +65,8 @@ const Post = ({
     unit = "m"
   }
 
-  // Request is sent to add user to post 'likes' field and post to
-  // user 'likedPosts' field.
+  // Request is sent to server to add curr user to post 'likes' field and
+  // curr post to user 'likedPosts' field.
   const likePost = async () => {
     try {
       setLikeClicked(true)
@@ -138,13 +139,25 @@ const Post = ({
       console.log(error)
     }
   }
+
+  const deletePost = async () => {
+    try {
+      if (window.confirm(`Delete post?`)) {
+        await postService.deletePost(post.id)
+        const allPosts = await postService.getAll()
+        setPosts(allPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
+        setUserPosts(userPosts.filter((userPost) => userPost.id !== post.id))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="post">
       <div className="post-left">
         <div className="post-user-image">
           <NavLink exact className="userimglink" to={`/user/${username}`}>
             <img src={avatar} alt={`${username}-avatar`} width="50px" />
-            <div className="overlay"></div>
           </NavLink>
         </div>
         <div className="post-text">
@@ -159,23 +172,37 @@ const Post = ({
         </div>
       </div>
       <div className="post-right">
-        <div className="post-likes">
-          <IconButton
-            className={likeClicked ? "like-button" : ""}
-            aria-label="like"
-            style={{ padding: 8 }}
-            onClick={
-              user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
-            }
-          >
-            {likedByUser ? (
-              <ThumbUpAltIcon fontSize="small" />
-            ) : (
-              <ThumbUpAltOutlinedIcon fontSize="small" />
-            )}
-          </IconButton>
-          <p className="likes-num">{likes.length}</p>
-        </div>
+        {userPosts.some((userPost) => userPost.id === post.id) ? (
+          <div className="post-delete">
+            <IconButton
+              aria-label="Remove"
+              style={{ padding: 8 }}
+              onClick={() => {
+                deletePost()
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </div>
+        ) : (
+          <div className="post-likes">
+            <IconButton
+              className={likeClicked ? "like-button" : ""}
+              aria-label="like"
+              style={{ padding: 8 }}
+              onClick={
+                user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
+              }
+            >
+              {likedByUser ? (
+                <ThumbUpAltIcon fontSize="small" />
+              ) : (
+                <ThumbUpAltOutlinedIcon fontSize="small" />
+              )}
+            </IconButton>
+            <p className="likes-num">{likes.length}</p>
+          </div>
+        )}
         <p className="post-date">
           {timeDiff}
           {unit}
