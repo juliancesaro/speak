@@ -29,6 +29,9 @@ const Post = ({
     userLikes.some((userLike) => userLike === post.id)
   )
 
+  // State for like animation
+  const [likeClicked, setLikeClicked] = useState(false)
+
   // Ensures likedByUser state updates immediately after userLikes state
   // changes (login, logout).
   useEffect(() => {
@@ -39,16 +42,21 @@ const Post = ({
   // user 'likedPosts' field.
   const likePost = async () => {
     try {
-      const returnedPost = await postService.update(post.id, {
+      setLikeClicked(true)
+      // Setting states before requests to hide the server response delay
+      setUserLikes(user.likedPosts.concat(post.id))
+      const newPost = { ...post, likes: likes.concat(user.id) }
+      const updatedPosts = posts
+        .filter((oldPost) => oldPost.id !== post.id)
+        .concat(newPost)
+      setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
+      // Server requests.
+      await postService.update(post.id, {
         likes: likes.concat(user.id),
-        likedPosts: user.likedPosts.concat(post.id),
       })
       const returnedUser = await userService.update(user.id, {
         likedPosts: user.likedPosts.concat(post.id),
       })
-      const updatedPosts = posts
-        .filter((oldPost) => oldPost.id !== post.id)
-        .concat(returnedPost)
       window.localStorage.setItem(
         "loggedShareitUser",
         JSON.stringify(returnedUser)
@@ -59,9 +67,7 @@ const Post = ({
           updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
         )
       )
-      setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
       setUser(returnedUser)
-      setUserLikes(returnedUser.likedPosts)
       setLikedByUser(true)
     } catch (error) {
       console.log(error)
@@ -70,7 +76,19 @@ const Post = ({
 
   const unlikePost = async () => {
     try {
-      const returnedPost = await postService.update(post.id, {
+      setLikeClicked(false)
+      // Setting states before requests to hide the server response delay.
+      setUserLikes(user.likedPosts.filter((likedPost) => likedPost !== post.id))
+      const newPost = {
+        ...post,
+        likes: likes.filter((like) => like !== user.id),
+      }
+      const updatedPosts = posts
+        .filter((oldPost) => oldPost.id !== post.id)
+        .concat(newPost)
+      setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
+      // Server requests.
+      await postService.update(post.id, {
         likes: likes.filter((like) => like !== user.id),
       })
       const returnedUser = await userService.update(user.id, {
@@ -78,9 +96,6 @@ const Post = ({
           (likedPost) => likedPost !== post.id
         ),
       })
-      const updatedPosts = posts
-        .filter((oldPost) => oldPost.id !== post.id)
-        .concat(returnedPost)
       window.localStorage.setItem(
         "loggedShareitUser",
         JSON.stringify(returnedUser)
@@ -91,9 +106,7 @@ const Post = ({
           updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
         )
       )
-      setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
       setUser(returnedUser)
-      setUserLikes(returnedUser.likedPosts)
       setLikedByUser(true)
     } catch (error) {
       console.log(error)
@@ -111,23 +124,20 @@ const Post = ({
         </div>
       </div>
       <div className="post-right">
-        {likedByUser ? (
-          <IconButton
-            aria-label="like"
-            style={{ padding: 8 }}
-            onClick={unlikePost}
-          >
+        <IconButton
+          className={likeClicked ? "like-button" : ""}
+          aria-label="like"
+          style={{ padding: 8 }}
+          onClick={
+            user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
+          }
+        >
+          {likedByUser ? (
             <ThumbUpAltIcon fontSize="small" />
-          </IconButton>
-        ) : (
-          <IconButton
-            aria-label="like"
-            style={{ padding: 8 }}
-            onClick={user ? likePost : toggleLoginForm}
-          >
+          ) : (
             <ThumbUpAltOutlinedIcon fontSize="small" />
-          </IconButton>
-        )}
+          )}
+        </IconButton>
         <p className="likes-num">{likes.length}</p>
       </div>
     </div>

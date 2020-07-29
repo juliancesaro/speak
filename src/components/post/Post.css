@@ -29,3 +29,26 @@
 .post-content {
   margin-bottom: 0;
 }
+.like-button {
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+  animation-name: wave;
+  animation-fill-mode: forwards;
+}
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-13deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
