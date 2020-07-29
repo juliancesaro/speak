@@ -12,8 +12,8 @@
 }
 .post-right {
   display: flex;
-  align-items: flex-start;
-  padding: 10px;
+  flex-direction: column;
+  padding: 12px 10px 20px 10px;
 }
 .likes-num {
   margin-top: 11px;
@@ -65,11 +65,19 @@
 .userimglink:hover .overlay {
   opacity: 0.2;
 }
+.post-likes {
+  display: flex;
+  align-items: flex-start;
+}
 .like-button {
   animation-duration: 1.5s;
   animation-iteration-count: 1;
   animation-name: wave;
   animation-fill-mode: forwards;
+}
+.post-date {
+  text-align: right;
+  margin: 0;
 }
 @keyframes wave {
   0% {

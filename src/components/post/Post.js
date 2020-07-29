@@ -39,6 +39,31 @@ const Post = ({
     setLikedByUser(userLikes.some((userLike) => userLike === post.id))
   }, [userLikes, likedByUser, post.id])
 
+  // Calculate post time
+  var unit = "s"
+  const currDate = new Date()
+  const postDate = new Date(post.date)
+  var timeDiff = currDate - postDate
+  timeDiff = Math.round(timeDiff / 1000)
+  if (timeDiff >= 2592000) {
+    timeDiff = `${postDate.toLocaleString("default", {
+      month: "short",
+    })} ${postDate.getDate().toString()}`
+    unit = ""
+  } else if (timeDiff >= 604800) {
+    timeDiff = Math.round(timeDiff / 604800)
+    unit = "w"
+  } else if (timeDiff >= 86400) {
+    timeDiff = Math.round(timeDiff / 86400)
+    unit = "d"
+  } else if (timeDiff >= 3600) {
+    timeDiff = Math.round(timeDiff / 3600)
+    unit = "h"
+  } else if (timeDiff >= 60) {
+    timeDiff = Math.round(timeDiff / 60)
+    unit = "m"
+  }
+
   // Request is sent to add user to post 'likes' field and post to
   // user 'likedPosts' field.
   const likePost = async () => {
@@ -134,21 +159,27 @@ const Post = ({
         </div>
       </div>
       <div className="post-right">
-        <IconButton
-          className={likeClicked ? "like-button" : ""}
-          aria-label="like"
-          style={{ padding: 8 }}
-          onClick={
-            user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
-          }
-        >
-          {likedByUser ? (
-            <ThumbUpAltIcon fontSize="small" />
-          ) : (
-            <ThumbUpAltOutlinedIcon fontSize="small" />
-          )}
-        </IconButton>
-        <p className="likes-num">{likes.length}</p>
+        <div className="post-likes">
+          <IconButton
+            className={likeClicked ? "like-button" : ""}
+            aria-label="like"
+            style={{ padding: 8 }}
+            onClick={
+              user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
+            }
+          >
+            {likedByUser ? (
+              <ThumbUpAltIcon fontSize="small" />
+            ) : (
+              <ThumbUpAltOutlinedIcon fontSize="small" />
+            )}
+          </IconButton>
+          <p className="likes-num">{likes.length}</p>
+        </div>
+        <p className="post-date">
+          {timeDiff}
+          {unit}
+        </p>
       </div>
     </div>
   )
