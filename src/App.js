@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "./App.css"
+import { HashRouter, Route, Switch } from "react-router-dom"
 import postService from "./services/posts"
 import userService from "./services/users"
 import Navbar from "./components/navbar/Navbar"
@@ -7,12 +8,14 @@ import Form from "./components/form/Form"
 import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
 import Home from "./components/home/Home"
+import User from "./components/user/User"
 
 /**
  * Main component containing the structure of the app.
  */
 const App = () => {
   const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
   const [user, setUser] = useState(null)
   const [userPosts, setUserPosts] = useState([])
   const [userLikes, setUserLikes] = useState([])
@@ -25,6 +28,9 @@ const App = () => {
     postService.getAll().then((initialPosts) => {
       initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
       setPosts(initialPosts)
+    })
+    userService.getAll().then((users) => {
+      setUsers(users)
     })
     const loggedUserJSON = window.localStorage.getItem("loggedShareitUser")
     if (loggedUserJSON) {
@@ -77,24 +83,35 @@ const App = () => {
           />
         </Form>
       ) : null}
-      <Navbar
-        toggleLoginForm={toggleLoginForm}
-        user={user}
-        setUser={setUser}
-        setUserLikes={setUserLikes}
-        setUserPosts={setUserPosts}
-      />
-      <Home
-        user={user}
-        setUser={setUser}
-        userLikes={userLikes}
-        setUserLikes={setUserLikes}
-        posts={posts}
-        setPosts={setPosts}
-        userPosts={userPosts}
-        setUserPosts={setUserPosts}
-        toggleLoginForm={toggleLoginForm}
-      />
+      <HashRouter basename="/">
+        <Navbar
+          toggleLoginForm={toggleLoginForm}
+          user={user}
+          setUser={setUser}
+          setUserLikes={setUserLikes}
+          setUserPosts={setUserPosts}
+        />
+        <Switch>
+          {users.map((user) => (
+            <Route key={user.username} path={`/user/${user.username}`}>
+              <User user={user} />
+            </Route>
+          ))}
+          <Route path="/">
+            <Home
+              user={user}
+              setUser={setUser}
+              userLikes={userLikes}
+              setUserLikes={setUserLikes}
+              posts={posts}
+              setPosts={setPosts}
+              userPosts={userPosts}
+              setUserPosts={setUserPosts}
+              toggleLoginForm={toggleLoginForm}
+            />
+          </Route>
+        </Switch>
+      </HashRouter>
     </div>
   )
 }

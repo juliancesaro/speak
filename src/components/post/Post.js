@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "./Post.css"
+import { NavLink } from "react-router-dom"
 import postService from "../../services/posts"
 import userService from "../../services/users"
 import IconButton from "@material-ui/core/IconButton"
@@ -116,10 +117,18 @@ const Post = ({
     <div className="post">
       <div className="post-left">
         <div className="post-user-image">
-          <img src={avatar} alt={`${username}-avatar`} width="50px" />
+          <NavLink exact to={`/user/${username}`}>
+            <img src={avatar} alt={`${username}-avatar`} width="50px" />
+          </NavLink>
         </div>
         <div className="post-text">
-          <p className="post-user">{username}</p>
+          <NavLink
+            exact
+            className="userlink"
+            to={`/user/${post.user.username}`}
+          >
+            <p className="post-user">{username}</p>
+          </NavLink>
           <p className="post-content">{content}</p>
         </div>
       </div>

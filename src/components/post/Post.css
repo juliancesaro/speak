@@ -29,6 +29,13 @@
 .post-content {
   margin-bottom: 0;
 }
+.userlink {
+  text-decoration: none;
+  color: black;
+}
+.userlink:hover {
+  text-decoration: underline;
+}
 .like-button {
   animation-duration: 1.5s;
   animation-iteration-count: 1;

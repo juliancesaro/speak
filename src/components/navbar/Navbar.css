@@ -10,6 +10,12 @@
 .nav-right {
   cursor: pointer;
 }
+.navlink {
+  color: white;
+}
+.activeNavlink {
+  color: lightskyblue;
+}
 @media only screen and (min-width: 600px) {
   .navbar {
     display: flex;

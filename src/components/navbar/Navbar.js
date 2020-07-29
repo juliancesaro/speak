@@ -1,5 +1,6 @@
 import React from "react"
 import "./Navbar.css"
+import { NavLink } from "react-router-dom"
 import postService from "../../services/posts"
 import userService from "../../services/users"
 import HomeIcon from "@material-ui/icons/Home"
@@ -33,7 +34,14 @@ const Navbar = ({
     <div className="navbar-wrapper">
       <div className="navbar">
         <div className="nav-left">
-          <HomeIcon fontSize="large" />
+          <NavLink
+            exact
+            className="navlink"
+            activeClassName="activeNavlink"
+            to="/"
+          >
+            <HomeIcon fontSize="large" />
+          </NavLink>
         </div>
         {user ? (
           <div className="nav-right" onClick={handleLogout}>

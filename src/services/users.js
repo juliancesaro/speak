@@ -11,6 +11,11 @@ const clearToken = () => {
   token = null
 }
 
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then((response) => response.data)
+}
+
 const create = async (newUser) => {
   const response = await axios.post(baseUrl, newUser)
   return response.data
@@ -32,4 +37,4 @@ const deleteUser = (id) => {
   return request.then((response) => response.data)
 }
 
-export default { create, update, setToken, clearToken, deleteUser }
+export default { getAll, create, update, setToken, clearToken, deleteUser }
