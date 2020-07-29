@@ -93,6 +93,7 @@ const App = () => {
         setPosts={setPosts}
         userPosts={userPosts}
         setUserPosts={setUserPosts}
+        toggleLoginForm={toggleLoginForm}
       />
     </div>
   )

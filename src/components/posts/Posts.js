@@ -5,7 +5,15 @@ import Post from "../post/Post"
 /**
  * Component maps posts list to a separate Post component.
  */
-const Posts = ({ user, setUser, userLikes, setUserLikes, posts, setPosts }) => {
+const Posts = ({
+  user,
+  setUser,
+  userLikes,
+  setUserLikes,
+  posts,
+  setPosts,
+  toggleLoginForm,
+}) => {
   return (
     <div className="posts">
       <ul>
@@ -23,6 +31,7 @@ const Posts = ({ user, setUser, userLikes, setUserLikes, posts, setPosts }) => {
               avatar={post.user.avatar}
               content={post.content}
               likes={post.likes}
+              toggleLoginForm={toggleLoginForm}
             />
           </li>
         ))}

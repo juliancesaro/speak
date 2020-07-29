@@ -15,6 +15,7 @@ const Home = ({
   setPosts,
   userPosts,
   setUserPosts,
+  toggleLoginForm,
 }) => {
   return (
     <div className="home-wrapper">
@@ -36,6 +37,7 @@ const Home = ({
           setUserLikes={setUserLikes}
           setPosts={setPosts}
           posts={posts}
+          toggleLoginForm={toggleLoginForm}
         />
       </div>
     </div>

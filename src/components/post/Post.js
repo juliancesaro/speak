@@ -22,6 +22,7 @@ const Post = ({
   avatar,
   content,
   likes,
+  toggleLoginForm,
 }) => {
   // State to determine whether current post has been liked by logged in user.
   const [likedByUser, setLikedByUser] = useState(
@@ -66,6 +67,38 @@ const Post = ({
       console.log(error)
     }
   }
+
+  const unlikePost = async () => {
+    try {
+      const returnedPost = await postService.update(post.id, {
+        likes: likes.filter((like) => like !== user.id),
+      })
+      const returnedUser = await userService.update(user.id, {
+        likedPosts: user.likedPosts.filter(
+          (likedPost) => likedPost !== post.id
+        ),
+      })
+      const updatedPosts = posts
+        .filter((oldPost) => oldPost.id !== post.id)
+        .concat(returnedPost)
+      window.localStorage.setItem(
+        "loggedShareitUser",
+        JSON.stringify(returnedUser)
+      )
+      window.localStorage.setItem(
+        "loggedShareitUserPosts",
+        JSON.stringify(
+          updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
+        )
+      )
+      setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
+      setUser(returnedUser)
+      setUserLikes(returnedUser.likedPosts)
+      setLikedByUser(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="post">
       <div className="post-left">
@@ -79,12 +112,18 @@ const Post = ({
       </div>
       <div className="post-right">
         {likedByUser ? (
-          <ThumbUpAltIcon fontSize="small" style={{ padding: 8 }} />
+          <IconButton
+            aria-label="like"
+            style={{ padding: 8 }}
+            onClick={unlikePost}
+          >
+            <ThumbUpAltIcon fontSize="small" />
+          </IconButton>
         ) : (
           <IconButton
             aria-label="like"
             style={{ padding: 8 }}
-            onClick={likePost}
+            onClick={user ? likePost : toggleLoginForm}
           >
             <ThumbUpAltOutlinedIcon fontSize="small" />
           </IconButton>
