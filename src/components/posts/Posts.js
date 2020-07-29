@@ -18,24 +18,26 @@ const Posts = ({
 }) => {
   return (
     <div className="posts">
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Post
-              user={user}
-              setUser={setUser}
-              userLikes={userLikes}
-              setUserLikes={setUserLikes}
-              posts={posts}
-              setPosts={setPosts}
-              post={post}
-              userPosts={userPosts}
-              setUserPosts={setUserPosts}
-              toggleLoginForm={toggleLoginForm}
-            />
-          </li>
-        ))}
-      </ul>
+      {posts ? (
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Post
+                user={user}
+                setUser={setUser}
+                userLikes={userLikes}
+                setUserLikes={setUserLikes}
+                posts={posts}
+                setPosts={setPosts}
+                post={post}
+                userPosts={userPosts}
+                setUserPosts={setUserPosts}
+                toggleLoginForm={toggleLoginForm}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   )
 }

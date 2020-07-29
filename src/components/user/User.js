@@ -1,18 +1,38 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./User.css"
 import userService from "../../services/users"
+import postService from "../../services/posts"
 import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
+import UserItems from "../userItems/UserItems"
 
 const User = ({
   allUsers,
   setAllUsers,
   user,
   setUser,
+  userLikes,
+  setUserLikes,
+  posts,
+  setPosts,
+  userPosts,
+  setUserPosts,
   userAccount,
   toggleLoginForm,
 }) => {
+  const [userAccountPosts, setUserAccountPosts] = useState(
+    posts.filter((post) =>
+      userAccount.posts.some((userPost) => userPost.id === post.id)
+    )
+  )
   const [followingBtnHover, setFollowingBtnHover] = useState(false)
+
+  useEffect(() => {
+    postService.getAll().then((initialPosts) => {
+      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
+      setPosts(initialPosts)
+    })
+  }, [userAccountPosts])
 
   const followUser = async () => {
     try {
@@ -90,7 +110,9 @@ const User = ({
               </div>
               <div className="user-follow-right">
                 {user ? (
-                  user.follows.some((follow) => follow === userAccount.id) ? (
+                  user.id === userAccount.id ? null : user.follows.some(
+                      (follow) => follow === userAccount.id
+                    ) ? (
                     followingBtnHover ? (
                       <Button
                         onClick={unFollowUser}
@@ -128,6 +150,17 @@ const User = ({
             </div>
           </div>
         ) : null}
+        <UserItems
+          user={user}
+          setUser={setUser}
+          userLikes={userLikes}
+          setUserLikes={setUserLikes}
+          setPosts={setUserAccountPosts}
+          posts={userAccountPosts}
+          userPosts={userPosts}
+          setUserPosts={setUserPosts}
+          toggleLoginForm={toggleLoginForm}
+        />
       </div>
     </div>
   )

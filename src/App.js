@@ -92,18 +92,29 @@ const App = () => {
           setUserPosts={setUserPosts}
         />
         <Switch>
-          {allUsers.map((allUser) => (
-            <Route key={allUser.username} path={`/user/${allUser.username}`}>
-              <User
-                allUsers={allUsers}
-                setAllUsers={setAllUsers}
-                user={user}
-                setUser={setUser}
-                userAccount={allUser}
-                toggleLoginForm={toggleLoginForm}
-              />
-            </Route>
-          ))}
+          {posts
+            ? allUsers.map((allUser) => (
+                <Route
+                  key={allUser.username}
+                  path={`/user/${allUser.username}`}
+                >
+                  <User
+                    allUsers={allUsers}
+                    setAllUsers={setAllUsers}
+                    user={user}
+                    setUser={setUser}
+                    userLikes={userLikes}
+                    setUserLikes={setUserLikes}
+                    posts={posts}
+                    setPosts={setPosts}
+                    userPosts={userPosts}
+                    setUserPosts={setUserPosts}
+                    userAccount={allUser}
+                    toggleLoginForm={toggleLoginForm}
+                  />
+                </Route>
+              ))
+            : null}
           <Route path="/">
             <Home
               user={user}
