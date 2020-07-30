@@ -6,6 +6,7 @@ import UserList from "../userList/UserList"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import Message from "../message/Message"
+import blank_user from "../../assets/blank_user.png"
 
 /**
  * Form handling post posting including user avatar.
@@ -59,6 +60,8 @@ const PostForm = ({
       setAddItemSuccess(false)
       if (error.message === "Content too long!") {
         setMessageText(error.message)
+      } else {
+        setMessageText("Please try again!")
       }
     }
   }
@@ -89,7 +92,7 @@ const PostForm = ({
               to={`/user/${user.username}`}
             >
               <img
-                src={user.avatar}
+                src={user.avatar ? user.avatar : blank_user}
                 alt={`${user.username}-avatar`}
                 width="50px"
               />
