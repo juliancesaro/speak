@@ -14,6 +14,7 @@ import blank_user from "../../assets/blank_user.png"
  * and a 'like' button.
  */
 const Post = ({
+  allUsers,
   user,
   setUser,
   userLikes,
@@ -141,6 +142,10 @@ const Post = ({
       console.log(error)
     }
   }
+
+  // Split the content where there is a mentioned user.
+  var newContent = content.split(/([@][\w]+)/)
+
   return (
     <div className="post">
       <div className="post-left">
@@ -151,6 +156,7 @@ const Post = ({
               alt={`${username}-avatar`}
               width="50px"
             />
+            <div className="overlay"></div>
           </NavLink>
         </div>
         <div className="post-text">
@@ -161,7 +167,34 @@ const Post = ({
           >
             <p className="post-user">{username}</p>
           </NavLink>
-          <p className="post-content">{content}</p>
+
+          {
+            // Map each item in newContent to its own span, if the mentioned
+            // user exists, create a link to their page
+            newContent.map((span) => {
+              if (span[0] === "@") {
+                const taggedUser = span.split("@")[1]
+                if (
+                  allUsers.some((allUser) => allUser.username === taggedUser)
+                ) {
+                  return (
+                    <NavLink
+                      key={span}
+                      exact
+                      className="taggeduserlink"
+                      to={`/user/${taggedUser}`}
+                    >
+                      <span>{span}</span>
+                    </NavLink>
+                  )
+                } else {
+                  return <span key={span}>{span}</span>
+                }
+              } else {
+                return <span key={span}>{span}</span>
+              }
+            })
+          }
         </div>
       </div>
       <div className="post-right">

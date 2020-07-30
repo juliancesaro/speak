@@ -142,6 +142,8 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
     setRegisterUsername(input)
     if (input.length > 10) {
       setUserInputError("Must be less than 10 characters!")
+    } else if (!input.match(/^[a-zA-Z0-9]+$/)) {
+      setUserInputError("Only letters and numbers!")
     } else {
       setUserInputError("")
     }

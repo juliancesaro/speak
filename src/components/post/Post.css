@@ -44,6 +44,13 @@
 .userlink:hover {
   text-decoration: underline;
 }
+.taggeduserlink {
+  text-decoration: none;
+  color: #1b95e0;
+}
+.taggeduserlink:hover {
+  text-decoration: underline;
+}
 .userimglink {
   position: relative;
   display: block;

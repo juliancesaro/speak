@@ -117,6 +117,7 @@ const App = () => {
             : null}
           <Route path="/">
             <Home
+              allUsers={allUsers}
               user={user}
               setUser={setUser}
               userLikes={userLikes}

@@ -7,6 +7,7 @@ import Posts from "../posts/Posts"
  * Contains PostForm and a list of Posts.
  */
 const Home = ({
+  allUsers,
   user,
   setUser,
   userLikes,
@@ -31,6 +32,7 @@ const Home = ({
           />
         ) : null}
         <Posts
+          allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}

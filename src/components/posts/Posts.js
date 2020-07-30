@@ -6,6 +6,7 @@ import Post from "../post/Post"
  * Component maps posts list to a separate Post component.
  */
 const Posts = ({
+  allUsers,
   user,
   setUser,
   userLikes,
@@ -23,6 +24,7 @@ const Posts = ({
           {posts.map((post) => (
             <li key={post.id}>
               <Post
+                allUsers={allUsers}
                 user={user}
                 setUser={setUser}
                 userLikes={userLikes}
