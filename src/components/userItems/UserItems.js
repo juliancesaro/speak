@@ -4,6 +4,7 @@ import postService from "../../services/posts"
 import Posts from "../posts/Posts"
 
 const UserItems = ({
+  allUsers,
   user,
   setUser,
   userAccount,
@@ -73,6 +74,7 @@ const UserItems = ({
       </div>
       {activeUserItem === "Posts" ? (
         <Posts
+          allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}
@@ -85,6 +87,7 @@ const UserItems = ({
         />
       ) : (
         <Posts
+          allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}

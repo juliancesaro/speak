@@ -138,6 +138,7 @@ const User = ({
           </div>
         ) : null}
         <UserItems
+          allUsers={allUsers}
           user={user}
           setUser={setUser}
           userAccount={userAccount}
