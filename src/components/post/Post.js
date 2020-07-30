@@ -190,6 +190,8 @@ const Post = ({
                 } else {
                   return <span key={span}>{span}</span>
                 }
+              } else if (span === "") {
+                return null
               } else {
                 return <span key={span}>{span}</span>
               }
