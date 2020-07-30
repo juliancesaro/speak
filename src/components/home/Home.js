@@ -24,6 +24,7 @@ const Home = ({
         <h1>Home</h1>
         {user ? (
           <PostForm
+            allUsers={allUsers}
             user={user}
             setPosts={setPosts}
             setUserPosts={setUserPosts}

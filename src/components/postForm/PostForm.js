@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./PostForm.css"
 import { NavLink } from "react-router-dom"
 import postService from "../../services/posts"
+import UserList from "../userList/UserList"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import Message from "../message/Message"
@@ -9,7 +10,14 @@ import Message from "../message/Message"
 /**
  * Form handling post posting including user avatar.
  */
-const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
+const PostForm = ({
+  allUsers,
+  user,
+  setPosts,
+  setUserPosts,
+  posts,
+  userPosts,
+}) => {
   // State for input fields.
   const [newContent, setNewContent] = useState("")
 
@@ -103,6 +111,7 @@ const PostForm = ({ user, setPosts, setUserPosts, posts, userPosts }) => {
                   width: "95%",
                 }}
               />
+              {/* <UserList allUsers={allUsers} /> */}
             </div>
             <div className="actions">
               <Button variant="contained" type="submit">

@@ -8,7 +8,7 @@ import Form from "./components/form/Form"
 import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
 import Home from "./components/home/Home"
-import User from "./components/user/User"
+import UserView from "./components/userView/UserView"
 
 /**
  * Main component containing the structure of the app.
@@ -98,7 +98,7 @@ const App = () => {
                   key={allUser.username}
                   path={`/user/${allUser.username}`}
                 >
-                  <User
+                  <UserView
                     allUsers={allUsers}
                     setAllUsers={setAllUsers}
                     user={user}

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import "./User.css"
+import "./UserView.css"
 import userService from "../../services/users"
 import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
