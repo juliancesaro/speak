@@ -5,7 +5,7 @@ import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
 import UserItems from "../userItems/UserItems"
 
-const User = ({
+const UserView = ({
   allUsers,
   setAllUsers,
   user,
@@ -155,4 +155,4 @@ const User = ({
   )
 }
 
-export default User
+export default UserView

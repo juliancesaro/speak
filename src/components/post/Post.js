@@ -28,10 +28,12 @@ const Post = ({
 }) => {
   const { content, likes } = post
   const { username, avatar } = post.user
+
   // State to determine whether current post has been liked by logged in user.
   const [likedByUser, setLikedByUser] = useState(
     userLikes.some((userLike) => userLike === post.id)
   )
+
   // State for like animation
   const [likeClicked, setLikeClicked] = useState(false)
 
