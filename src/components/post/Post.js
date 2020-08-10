@@ -32,7 +32,6 @@ const Post = ({
   const [likedByUser, setLikedByUser] = useState(
     userLikes.some((userLike) => userLike === post.id)
   )
-
   // State for like animation
   const [likeClicked, setLikeClicked] = useState(false)
 
@@ -73,7 +72,7 @@ const Post = ({
     try {
       setLikeClicked(true)
       // Setting states before requests to hide the server response delay
-      setUserLikes(user.likedPosts.concat(post.id))
+      setUserLikes(userLikes.concat(post.id))
       const newPost = { ...post, likes: likes.concat(user.id) }
       const updatedPosts = posts
         .filter((oldPost) => oldPost.id !== post.id)
@@ -101,7 +100,7 @@ const Post = ({
     try {
       setLikeClicked(false)
       // Setting states before requests to hide the server response delay.
-      setUserLikes(user.likedPosts.filter((likedPost) => likedPost !== post.id))
+      setUserLikes(userLikes.filter((likedPost) => likedPost !== post.id))
       const newPost = {
         ...post,
         likes: likes.filter((like) => like !== user.id),
@@ -124,7 +123,7 @@ const Post = ({
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
-      setLikedByUser(true)
+      setLikedByUser(false)
     } catch (error) {
       console.log(error)
     }
@@ -165,7 +164,7 @@ const Post = ({
             className="userlink"
             to={`/user/${post.user.username}`}
           >
-            <p className="post-user">{username}</p>
+            <p className="post-user">@{username}</p>
           </NavLink>
 
           {
