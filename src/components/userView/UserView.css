@@ -84,8 +84,19 @@
   min-height: calc(100vh);
   background-color: #222831;
   color: white;
+  padding-bottom: 55px;
 }
 .userview-mobile {
   min-height: calc(100vh);
   margin: 0 auto;
+}
+.user-info-mobile {
+  padding: 30px 20px 10px 20px;
+  border-bottom: 1px solid #3b4353;
+}
+.user-info-mobile > img {
+  border-radius: 50%;
+}
+.user-info-mobile > h2 {
+  margin-bottom: 0;
 }

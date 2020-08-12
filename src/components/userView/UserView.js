@@ -89,7 +89,7 @@ const UserView = ({
     <div className={`userview-wrapper${isMobile ? "-mobile" : ""}`}>
       <div className={`userview${isMobile ? "-mobile" : ""}`}>
         {userAccount ? (
-          <div className="user-info">
+          <div className={`user-info${isMobile ? "-mobile" : ""}`}>
             <img
               src={userAccount.avatar ? userAccount.avatar : blank_user}
               alt={`${userAccount.username}-avatar`}
