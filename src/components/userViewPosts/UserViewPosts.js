@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
-import "./UserPosts.css"
 import postService from "../../services/posts"
 import Posts from "../posts/Posts"
 
-const UserPosts = ({
+const UserViewPosts = ({
   allUsers,
   user,
   setUser,
@@ -78,4 +77,4 @@ const UserPosts = ({
   )
 }
 
-export default UserPosts
+export default UserViewPosts

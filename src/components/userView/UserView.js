@@ -3,7 +3,7 @@ import "./UserView.css"
 import userService from "../../services/users"
 import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
-import UserPosts from "../userPosts/UserPosts"
+import UserViewPosts from "../userViewPosts/UserViewPosts"
 import Loading from "../loading/Loading"
 
 const UserView = ({
@@ -165,7 +165,7 @@ const UserView = ({
           </div>
         </div>
         {posts ? (
-          <UserPosts
+          <UserViewPosts
             allUsers={allUsers}
             user={user}
             setUser={setUser}

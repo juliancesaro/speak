@@ -84,13 +84,13 @@ const App = () => {
         </Form>
       ) : null}
       <HashRouter basename="/">
-        {/* <Navbar
+        <Navbar
           toggleLoginForm={toggleLoginForm}
           user={user}
           setUser={setUser}
           setUserLikes={setUserLikes}
           setUserPosts={setUserPosts}
-        /> */}
+        />
         <Switch>
           {allUsers.map((allUser) => (
             <Route key={allUser.username} path={`/user/${allUser.username}`}>

@@ -37,9 +37,6 @@ const Post = ({
 }) => {
   const classes = useStyles()
 
-  if (post.content === "Hello! ") {
-    console.log(post.likes)
-  }
   const { content, likes } = post
   const { username, avatar } = post.user
 
