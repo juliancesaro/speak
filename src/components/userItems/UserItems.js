@@ -29,8 +29,8 @@ const UserItems = ({
 
   const [activeUserItem, setActiveUserItem] = useState("Posts")
 
-  // If a post is liked in user view, update the posts on the home page
-  // when a post is like, it does not immediately appear in likedPosts,
+  // If a post is liked in user view, update the posts on the home page.
+  // When a post is liked, it does not immediately appear in likedPosts,
   // Twitter also has this issue.
   useEffect(() => {
     postService.getAll().then((initialPosts) => {

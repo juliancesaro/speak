@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./Home.css"
 import PostForm from "../postForm/PostForm"
 import Posts from "../posts/Posts"
@@ -19,6 +19,20 @@ const Home = ({
   toggleLoginForm,
 }) => {
   const [activePostsItem, setActivePostsItem] = useState("Following")
+  const [userFollowingPosts, setUserFollowingPosts] = useState(posts)
+
+  // When posts have been received from the DB or user logs in
+  useEffect(() => {
+    if (user) {
+      setUserFollowingPosts(
+        posts.filter(
+          (post) =>
+            user.follows.includes(post.user.id) || post.user.id === user.id
+        )
+      )
+    }
+  }, [posts, user])
+
   const setFollowingActive = () => {
     setActivePostsItem("Following")
   }
@@ -49,7 +63,7 @@ const Home = ({
                 <p>Following</p>
               </div>
               <div
-                className={`user-nav-likes${
+                className={`posts-nav-all${
                   activePostsItem === "All" ? " active" : ""
                 }`}
                 onClick={setAllActive}
@@ -64,12 +78,8 @@ const Home = ({
                 setUser={setUser}
                 userLikes={userLikes}
                 setUserLikes={setUserLikes}
-                setPosts={setPosts}
-                posts={posts.filter(
-                  (post) =>
-                    user.follows.includes(post.user.id) ||
-                    post.user.id === user.id
-                )}
+                setPosts={setUserFollowingPosts}
+                posts={userFollowingPosts}
                 userPosts={userPosts}
                 setUserPosts={setUserPosts}
                 toggleLoginForm={toggleLoginForm}

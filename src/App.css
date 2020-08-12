@@ -10,10 +10,6 @@ body {
 .App {
   height: 100%;
 }
-.app-body {
-  display: flex;
-  flex: 1;
-}
 .row {
   max-width: 1039px;
   margin-right: auto;

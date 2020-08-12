@@ -1,37 +1,35 @@
 .navbar-wrapper {
-  background-color: #2d323f;
+  position: fixed;
+  background-color: #222831;
   display: flex;
-  justify-content: center;
-  height: 80px;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100px;
+  z-index: 1;
 }
 .nav-left {
+  padding: 10px;
   cursor: pointer;
 }
 .nav-right {
+  padding: 10px;
   cursor: pointer;
 }
 .navlink {
   color: white;
 }
 .activeNavlink {
-  color: lightskyblue;
+  color: #00adb5;
 }
 @media only screen and (min-width: 600px) {
   .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 500px;
     max-width: 1000px;
     color: white;
   }
 }
 @media only screen and (max-width: 599px) {
   .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
     max-width: 1000px;
     color: white;
   }

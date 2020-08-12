@@ -7,6 +7,43 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import Message from "../message/Message"
 import blank_user from "../../assets/blank_user.png"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  message: {
+    "& > *": {
+      backgroundColor: "#3b4353",
+      color: "white",
+      "&:hover": {
+        backgroundColor: "#3b4353",
+        color: "white",
+      },
+      "&.MuiFormHelperText-root": {
+        "&.Mui-focused": {
+          backgroundColor: "#222831",
+        },
+        "&.Mui-error": {
+          color: "#f44336",
+        },
+        backgroundColor: "#222831",
+        color: "#f44336",
+      },
+      "&.MuiFormLabel-root.Mui-error": {
+        color: "#f44336",
+      },
+      "&.Mui-focused": {
+        backgroundColor: "#3b4353",
+        color: "white",
+      },
+      "&.MuiFilledInput-underline:before": {
+        borderBottom: "2px solid #6f7b9b",
+      },
+      "&.MuiFilledInput-underline:after": {
+        borderBottom: "2px solid #12adb3",
+      },
+    },
+  },
+}))
 
 /**
  * Form handling post posting including user avatar.
@@ -19,6 +56,7 @@ const PostForm = ({
   posts,
   userPosts,
 }) => {
+  const classes = useStyles()
   // State for input fields.
   const [newContent, setNewContent] = useState("")
 
@@ -100,20 +138,24 @@ const PostForm = ({
             </NavLink>
           </div>
           <div className="postform-right">
-            <div className="postform-content">
+            <div className="postform-right-content">
               <TextField
-                required
-                error={contentInputError !== ""}
-                helperText={contentInputError}
+                className={classes.message}
                 id="content"
-                placeholder="What's on your mind?"
-                multiline
+                type="text"
+                name="message"
+                label="What's on your mind?"
+                error={contentInputError}
                 value={newContent}
                 onChange={handleContentChange}
+                helperText={contentInputError}
+                multiline
+                variant="filled"
                 style={{
                   width: "95%",
                 }}
               />
+
               {/* <UserList allUsers={allUsers} /> */}
             </div>
             <div className="actions">

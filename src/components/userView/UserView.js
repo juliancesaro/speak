@@ -76,7 +76,7 @@ const UserView = ({
   }
 
   return (
-    <div className="user-wrapper">
+    <div className="userview-wrapper">
       <div className="user">
         {userAccount ? (
           <div className="user-info">

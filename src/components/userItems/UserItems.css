@@ -19,18 +19,18 @@
   transition: background-color 0.2s ease;
 }
 .user-nav-posts:hover {
-  background-color: rgba(135, 206, 250, 0.5);
+  background-color: rgba(0, 173, 181, 0.5);
 }
 .user-nav-likes:hover {
-  background-color: rgba(135, 206, 250, 0.5);
+  background-color: rgba(0, 173, 181, 0.5);
 }
 .user-nav-posts.active {
   text-align: center;
   width: 50%;
-  border-bottom: 2px solid lightskyblue;
+  border-bottom: 2px solid #00adb5;
 }
 .user-nav-likes.active {
   text-align: center;
   width: 50%;
-  border-bottom: 2px solid lightskyblue;
+  border-bottom: 2px solid #00adb5;
 }

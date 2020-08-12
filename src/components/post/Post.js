@@ -166,7 +166,7 @@ const Post = ({
             className="userlink"
             to={`/user/${post.user.username}`}
           >
-            <p className="post-user">@{username}</p>
+            <p className="post-user">{username}</p>
           </NavLink>
 
           {
@@ -224,7 +224,7 @@ const Post = ({
               }
             >
               {likedByUser ? (
-                <ThumbUpAltIcon fontSize="small" />
+                <ThumbUpAltIcon fontSize="small" fill="white" />
               ) : (
                 <ThumbUpAltOutlinedIcon fontSize="small" />
               )}
