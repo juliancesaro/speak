@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./Home.css"
 import PostForm from "../postForm/PostForm"
+import HomePosts from "../homePosts/HomePosts"
 import Posts from "../posts/Posts"
+import Loading from "../loading/Loading"
 
 /**
  * Contains PostForm and a list of Posts.
@@ -19,19 +21,6 @@ const Home = ({
   toggleLoginForm,
 }) => {
   const [activePostsItem, setActivePostsItem] = useState("Following")
-  const [userFollowingPosts, setUserFollowingPosts] = useState(posts)
-
-  // When posts have been received from the DB or user logs in
-  useEffect(() => {
-    if (user) {
-      setUserFollowingPosts(
-        posts.filter(
-          (post) =>
-            user.follows.includes(post.user.id) || post.user.id === user.id
-        )
-      )
-    }
-  }, [posts, user])
 
   const setFollowingActive = () => {
     setActivePostsItem("Following")
@@ -39,10 +28,12 @@ const Home = ({
   const setAllActive = () => {
     setActivePostsItem("All")
   }
+
   return (
     <div className="home-wrapper">
       <div className="home">
         <h1>Home</h1>
+
         {user ? (
           <>
             <PostForm
@@ -71,21 +62,8 @@ const Home = ({
                 <p>All</p>
               </div>
             </div>
-            {activePostsItem === "Following" ? (
-              <Posts
-                allUsers={allUsers}
-                user={user}
-                setUser={setUser}
-                userLikes={userLikes}
-                setUserLikes={setUserLikes}
-                setPosts={setUserFollowingPosts}
-                posts={userFollowingPosts}
-                userPosts={userPosts}
-                setUserPosts={setUserPosts}
-                toggleLoginForm={toggleLoginForm}
-              />
-            ) : (
-              <Posts
+            {posts ? (
+              <HomePosts
                 allUsers={allUsers}
                 user={user}
                 setUser={setUser}
@@ -96,7 +74,10 @@ const Home = ({
                 userPosts={userPosts}
                 setUserPosts={setUserPosts}
                 toggleLoginForm={toggleLoginForm}
+                activePostsItem={activePostsItem}
               />
+            ) : (
+              <Loading />
             )}
           </>
         ) : (

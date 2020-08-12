@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
-import "./UserItems.css"
+import "./UserPosts.css"
 import postService from "../../services/posts"
 import Posts from "../posts/Posts"
 
-const UserItems = ({
+const UserPosts = ({
   allUsers,
   user,
   setUser,
@@ -15,6 +15,7 @@ const UserItems = ({
   userPosts,
   setUserPosts,
   toggleLoginForm,
+  activeUserItem,
 }) => {
   const [userAccountPosts, setUserAccountPosts] = useState(
     posts.filter((post) =>
@@ -26,8 +27,6 @@ const UserItems = ({
       userAccount.likedPosts.some((userLikedPost) => userLikedPost === post.id)
     )
   )
-
-  const [activeUserItem, setActiveUserItem] = useState("Posts")
 
   // If a post is liked in user view, update the posts on the home page.
   // When a post is liked, it does not immediately appear in likedPosts,
@@ -46,32 +45,8 @@ const UserItems = ({
     })
   }, [userAccountLikedPosts, setPosts])
 
-  const setLikesActive = () => {
-    setActiveUserItem("Likes")
-  }
-  const setPostsActive = () => {
-    setActiveUserItem("Posts")
-  }
   return (
     <div className="useritems">
-      <div className="user-nav">
-        <div
-          className={`user-nav-posts${
-            activeUserItem === "Posts" ? " active" : ""
-          }`}
-          onClick={setPostsActive}
-        >
-          <p>Posts</p>
-        </div>
-        <div
-          className={`user-nav-likes${
-            activeUserItem === "Likes" ? " active" : ""
-          }`}
-          onClick={setLikesActive}
-        >
-          <p>Likes</p>
-        </div>
-      </div>
       {activeUserItem === "Posts" ? (
         <Posts
           allUsers={allUsers}
@@ -103,4 +78,4 @@ const UserItems = ({
   )
 }
 
-export default UserItems
+export default UserPosts

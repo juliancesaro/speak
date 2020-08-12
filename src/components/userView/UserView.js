@@ -3,7 +3,8 @@ import "./UserView.css"
 import userService from "../../services/users"
 import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
-import UserItems from "../userItems/UserItems"
+import UserPosts from "../userPosts/UserPosts"
+import Loading from "../loading/Loading"
 
 const UserView = ({
   allUsers,
@@ -20,6 +21,7 @@ const UserView = ({
   toggleLoginForm,
 }) => {
   const [followingBtnHover, setFollowingBtnHover] = useState(false)
+  const [activeUserItem, setActiveUserItem] = useState("Posts")
 
   const followUser = async () => {
     try {
@@ -75,9 +77,16 @@ const UserView = ({
     }
   }
 
+  const setLikesActive = () => {
+    setActiveUserItem("Likes")
+  }
+  const setPostsActive = () => {
+    setActiveUserItem("Posts")
+  }
+
   return (
     <div className="userview-wrapper">
-      <div className="user">
+      <div className="userview">
         {userAccount ? (
           <div className="user-info">
             <img
@@ -137,19 +146,42 @@ const UserView = ({
             </div>
           </div>
         ) : null}
-        <UserItems
-          allUsers={allUsers}
-          user={user}
-          setUser={setUser}
-          userAccount={userAccount}
-          userLikes={userLikes}
-          setUserLikes={setUserLikes}
-          setPosts={setPosts}
-          posts={posts}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
-          toggleLoginForm={toggleLoginForm}
-        />
+        <div className="user-nav">
+          <div
+            className={`user-nav-posts${
+              activeUserItem === "Posts" ? " active" : ""
+            }`}
+            onClick={setPostsActive}
+          >
+            <p>Posts</p>
+          </div>
+          <div
+            className={`user-nav-likes${
+              activeUserItem === "Likes" ? " active" : ""
+            }`}
+            onClick={setLikesActive}
+          >
+            <p>Likes</p>
+          </div>
+        </div>
+        {posts ? (
+          <UserPosts
+            allUsers={allUsers}
+            user={user}
+            setUser={setUser}
+            userAccount={userAccount}
+            userLikes={userLikes}
+            setUserLikes={setUserLikes}
+            setPosts={setPosts}
+            posts={posts}
+            userPosts={userPosts}
+            setUserPosts={setUserPosts}
+            toggleLoginForm={toggleLoginForm}
+            activeUserItem={activeUserItem}
+          />
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   )

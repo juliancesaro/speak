@@ -8,6 +8,15 @@ import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
 import blank_user from "../../assets/blank_user.png"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles(() => ({
+  icon: {
+    "& > *": {
+      color: "#8899a6",
+    },
+  },
+}))
 
 /**
  * Post component consisting of user information, post content,
@@ -26,6 +35,11 @@ const Post = ({
   setUserPosts,
   toggleLoginForm,
 }) => {
+  const classes = useStyles()
+
+  if (post.content === "Hello! ") {
+    console.log(post.likes)
+  }
   const { content, likes } = post
   const { username, avatar } = post.user
 
@@ -210,25 +224,31 @@ const Post = ({
                 deletePost()
               }}
             >
-              <DeleteIcon fontSize="small" />
+              <DeleteIcon className={classes.icon} fontSize="small" />
             </IconButton>
           </div>
         ) : (
           <div className="post-likes">
-            <IconButton
+            <div
               className={likeClicked ? "like-button" : ""}
-              aria-label="like"
-              style={{ padding: 8 }}
+              style={{ paddingTop: 8, paddingRight: 6 }}
               onClick={
                 user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm
               }
             >
               {likedByUser ? (
-                <ThumbUpAltIcon fontSize="small" fill="white" />
+                <ThumbUpAltIcon
+                  className={classes.icon}
+                  fontSize="small"
+                  fill="white"
+                />
               ) : (
-                <ThumbUpAltOutlinedIcon fontSize="small" />
+                <ThumbUpAltOutlinedIcon
+                  className={classes.icon}
+                  fontSize="small"
+                />
               )}
-            </IconButton>
+            </div>
             <p className="likes-num">{likes.length}</p>
           </div>
         )}

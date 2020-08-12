@@ -7,15 +7,16 @@
 }
 .post-left {
   display: flex;
-  padding: 20px;
+  padding: 20px 0 20px 20px;
 }
 .post-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 12px 10px 20px 10px;
+  padding: 12px 10px 20px 0;
 }
 .likes-num {
+  color: #8899a6;
   margin-top: 11px;
   font-size: 14px;
 }
@@ -83,8 +84,10 @@
   animation-iteration-count: 1;
   animation-name: wave;
   animation-fill-mode: forwards;
+  transform-origin: 40% 60%;
 }
 .post-date {
+  color: #8899a6;
   text-align: right;
   margin: 0;
 }

@@ -14,7 +14,7 @@ import UserView from "./components/userView/UserView"
  * Main component containing the structure of the app.
  */
 const App = () => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState(null)
   const [allUsers, setAllUsers] = useState([])
   const [user, setUser] = useState(null)
   const [userPosts, setUserPosts] = useState([])
@@ -84,37 +84,32 @@ const App = () => {
         </Form>
       ) : null}
       <HashRouter basename="/">
-        <Navbar
+        {/* <Navbar
           toggleLoginForm={toggleLoginForm}
           user={user}
           setUser={setUser}
           setUserLikes={setUserLikes}
           setUserPosts={setUserPosts}
-        />
+        /> */}
         <Switch>
-          {posts
-            ? allUsers.map((allUser) => (
-                <Route
-                  key={allUser.username}
-                  path={`/user/${allUser.username}`}
-                >
-                  <UserView
-                    allUsers={allUsers}
-                    setAllUsers={setAllUsers}
-                    user={user}
-                    setUser={setUser}
-                    userLikes={userLikes}
-                    setUserLikes={setUserLikes}
-                    posts={posts}
-                    setPosts={setPosts}
-                    userPosts={userPosts}
-                    setUserPosts={setUserPosts}
-                    userAccount={allUser}
-                    toggleLoginForm={toggleLoginForm}
-                  />
-                </Route>
-              ))
-            : null}
+          {allUsers.map((allUser) => (
+            <Route key={allUser.username} path={`/user/${allUser.username}`}>
+              <UserView
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
+                user={user}
+                setUser={setUser}
+                userLikes={userLikes}
+                setUserLikes={setUserLikes}
+                posts={posts}
+                setPosts={setPosts}
+                userPosts={userPosts}
+                setUserPosts={setUserPosts}
+                userAccount={allUser}
+                toggleLoginForm={toggleLoginForm}
+              />
+            </Route>
+          ))}
           <Route path="/">
             <Home
               allUsers={allUsers}

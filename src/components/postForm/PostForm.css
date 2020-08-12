@@ -8,6 +8,7 @@
 .postform-right {
   position: relative;
   display: flex;
+  flex-direction: column;
   width: 100%;
   align-items: flex-end;
 }
@@ -15,7 +16,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 100%;
+}
+.actions {
+  width: 100%;
+  margin-top: 10px;
 }
 .user-image {
   margin-right: 5px;

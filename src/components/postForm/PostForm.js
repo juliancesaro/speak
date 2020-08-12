@@ -9,14 +9,13 @@ import Message from "../message/Message"
 import blank_user from "../../assets/blank_user.png"
 import { makeStyles } from "@material-ui/core/styles"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   message: {
     "& > *": {
       backgroundColor: "#3b4353",
       color: "white",
       "&:hover": {
         backgroundColor: "#3b4353",
-        color: "white",
       },
       "&.MuiFormHelperText-root": {
         "&.Mui-focused": {
@@ -28,12 +27,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#222831",
         color: "#f44336",
       },
-      "&.MuiFormLabel-root.Mui-error": {
-        color: "#f44336",
+      "&.MuiFormLabel-root": {
+        "&.Mui-error": {
+          color: "#f44336",
+        },
+        color: "#8899a6",
       },
       "&.Mui-focused": {
         backgroundColor: "#3b4353",
-        color: "white",
       },
       "&.MuiFilledInput-underline:before": {
         borderBottom: "2px solid #6f7b9b",
@@ -144,15 +145,16 @@ const PostForm = ({
                 id="content"
                 type="text"
                 name="message"
-                label="What's on your mind?"
-                error={contentInputError}
+                label="What's Happening?"
+                error={contentInputError !== ""}
                 value={newContent}
                 onChange={handleContentChange}
                 helperText={contentInputError}
                 multiline
                 variant="filled"
                 style={{
-                  width: "95%",
+                  width: "100%",
+                  minWidth: 170,
                 }}
               />
 
