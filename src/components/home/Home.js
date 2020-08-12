@@ -4,6 +4,7 @@ import PostForm from "../postForm/PostForm"
 import HomePosts from "../homePosts/HomePosts"
 import Posts from "../posts/Posts"
 import Loading from "../loading/Loading"
+import { isMobile } from "react-device-detect"
 
 /**
  * Contains PostForm and a list of Posts.
@@ -30,8 +31,8 @@ const Home = ({
   }
 
   return (
-    <div className="home-wrapper">
-      <div className="home">
+    <div className={`home-wrapper${isMobile ? "-mobile" : ""}`}>
+      <div className={`home${isMobile ? "-mobile" : ""}`}>
         <h1>Home</h1>
 
         {user ? (

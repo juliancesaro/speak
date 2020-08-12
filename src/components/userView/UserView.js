@@ -5,6 +5,7 @@ import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
 import UserViewPosts from "../userViewPosts/UserViewPosts"
 import Loading from "../loading/Loading"
+import { isMobile } from "react-device-detect"
 
 const UserView = ({
   allUsers,
@@ -85,8 +86,8 @@ const UserView = ({
   }
 
   return (
-    <div className="userview-wrapper">
-      <div className="userview">
+    <div className={`userview-wrapper${isMobile ? "-mobile" : ""}`}>
+      <div className={`userview${isMobile ? "-mobile" : ""}`}>
         {userAccount ? (
           <div className="user-info">
             <img

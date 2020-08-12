@@ -8,10 +8,12 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import logo from "../../assets/logo.png"
 import { makeStyles } from "@material-ui/core/styles"
+import { isMobile } from "react-device-detect"
 
 const useStyles = makeStyles(() => ({
   icon: {
     "& > *": {
+      color: "white",
       cursor: "pointer",
     },
   },
@@ -44,10 +46,12 @@ const Navbar = ({
   }
 
   return (
-    <div className="navbar-wrapper">
-      <div className="navbar">
-        <div className="nav-top">
-          <img src={logo} alt="speak-logo" width="35px"></img>
+    <div className={`navbar-wrapper${isMobile ? "-mobile" : ""}`}>
+      <div className={`navbar${isMobile ? "-mobile" : ""}`}>
+        <div className={`nav-${isMobile ? "left" : "top"}`}>
+          {isMobile ? null : (
+            <img src={logo} alt="speak-logo" width="35px"></img>
+          )}
           <NavLink
             exact
             className="navlink"
@@ -58,11 +62,17 @@ const Navbar = ({
           </NavLink>
         </div>
         {user ? (
-          <div className="nav-bottom" onClick={handleLogout}>
+          <div
+            className={`nav-${isMobile ? "right" : "top"}`}
+            onClick={handleLogout}
+          >
             <ExitToAppIcon className={classes.icon} fontSize="large" />
           </div>
         ) : (
-          <div className="nav-bottom" onClick={toggleLoginForm}>
+          <div
+            className={`nav-${isMobile ? "right" : "bottom"}`}
+            onClick={toggleLoginForm}
+          >
             <AccountBoxIcon className={classes.icon} fontSize="large" />
           </div>
         )}

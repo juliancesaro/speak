@@ -51,3 +51,30 @@
     color: white;
   }
 }
+/** Mobile CSS */
+.navbar-wrapper-mobile {
+  position: fixed;
+  bottom: 0;
+  background-color: #222831;
+  width: 100%;
+  z-index: 2;
+  border-top: 1px solid #3b4353;
+}
+.navbar-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.nav-left {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 0 8px 40px;
+  cursor: pointer;
+}
+.nav-right {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 40px 8px 0;
+  cursor: pointer;
+}
