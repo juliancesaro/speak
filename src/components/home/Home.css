@@ -69,7 +69,6 @@
 }
 .home-mobile {
   min-height: 100vh;
-  border-left: 1px solid #3b4353;
   padding-bottom: 55px;
 }
 .home-mobile > h1 {
