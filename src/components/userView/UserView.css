@@ -1,20 +1,29 @@
 @media only screen and (min-width: 600px) {
   .userview {
-    width: 500px;
+    min-height: calc(100vh);
+    width: 550px;
     margin: 0 auto;
+    border-left: 1px solid #3b4353;
+    border-right: 1px solid #3b4353;
   }
 }
 @media only screen and (max-width: 599px) {
   .userview {
+    min-height: calc(100vh);
     width: 90%;
     margin: 0 auto;
+    border-left: 1px solid #3b4353;
+    border-right: 1px solid #3b4353;
   }
 }
 .userview-wrapper {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh);
   background-color: #222831;
-  padding: 60px 0 20px 0;
   color: white;
+}
+.user-info {
+  padding: 60px 20px 10px 20px;
+  border-bottom: 1px solid #3b4353;
 }
 .user-info > img {
   border-radius: 50%;
@@ -38,6 +47,7 @@
   justify-content: space-evenly;
   font-weight: bold;
   margin-bottom: 10px;
+  border-bottom: 1px solid #393e46;
 }
 .user-nav-posts {
   text-align: center;

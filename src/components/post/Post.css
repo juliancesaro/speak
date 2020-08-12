@@ -1,9 +1,8 @@
 .post {
   display: flex;
   justify-content: space-between;
-  background-color: #393e46;
-  margin-bottom: 20px;
-  border-radius: 5px;
+  background-color: #222831;
+  border-bottom: 1px solid #3b4353;
 }
 .post-left {
   display: flex;

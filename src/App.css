@@ -9,9 +9,5 @@ body {
 }
 .App {
   height: 100%;
-}
-.row {
-  max-width: 1039px;
-  margin-right: auto;
-  margin-left: auto;
+  background-color: #222831;
 }

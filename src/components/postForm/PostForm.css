@@ -1,5 +1,7 @@
 .postform {
   position: relative;
+  padding: 20px 20px 0 20px;
+  border-bottom: 1px solid #393e46;
 }
 .postform-items {
   display: flex;

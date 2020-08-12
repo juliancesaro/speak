@@ -3,7 +3,6 @@ import "./Post.css"
 import { NavLink } from "react-router-dom"
 import postService from "../../services/posts"
 import userService from "../../services/users"
-import IconButton from "@material-ui/core/IconButton"
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
@@ -14,6 +13,7 @@ const useStyles = makeStyles(() => ({
   icon: {
     "& > *": {
       color: "#8899a6",
+      cursor: "pointer",
     },
   },
 }))
@@ -214,15 +214,13 @@ const Post = ({
       <div className="post-right">
         {userPosts.some((userPost) => userPost.id === post.id) ? (
           <div className="post-delete">
-            <IconButton
-              aria-label="Remove"
-              style={{ padding: 8 }}
+            <DeleteIcon
+              className={classes.icon}
+              fontSize="small"
               onClick={() => {
                 deletePost()
               }}
-            >
-              <DeleteIcon className={classes.icon} fontSize="small" />
-            </IconButton>
+            />
           </div>
         ) : (
           <div className="post-likes">
