@@ -17,20 +17,15 @@
   flex-direction: column;
   align-items: flex-end;
   padding: 15px;
-  cursor: pointer;
 }
 .nav-bottom {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   padding: 15px;
-  cursor: pointer;
 }
 .nav-top > .navlink {
   margin-top: 50px;
-}
-.nav-right {
-  padding: 10px;
   cursor: pointer;
 }
 .navlink {
@@ -38,6 +33,9 @@
 }
 .activeNavlink {
   color: #00adb5;
+}
+.button {
+  cursor: pointer;
 }
 @media only screen and (min-width: 600px) {
   .navbar {
@@ -70,11 +68,9 @@
   display: flex;
   align-items: flex-end;
   padding: 8px 0 8px 40px;
-  cursor: pointer;
 }
 .nav-right {
   display: flex;
   align-items: flex-end;
   padding: 8px 40px 8px 0;
-  cursor: pointer;
 }

@@ -14,6 +14,10 @@
   justify-content: space-between;
   padding: 12px 10px 20px 0;
 }
+.post-delete {
+  display: flex;
+  justify-content: flex-end;
+}
 .likes-num {
   color: #8899a6;
   margin-top: 11px;

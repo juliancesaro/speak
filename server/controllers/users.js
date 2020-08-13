@@ -57,7 +57,17 @@ usersRouter.put("/likedPosts/:id", async (request, response, next) => {
     const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
       new: true,
     }).populate("posts", { content: 1, date: 1 })
-    response.json(updatedUser.toJSON())
+
+    response.json({
+      id: updatedUser._id,
+      token: request.token,
+      username: updatedUser.username,
+      avatar: updatedUser.avatar,
+      posts: updatedUser.posts,
+      likedPosts: updatedUser.likedPosts,
+      follows: updatedUser.follows,
+      followers: updatedUser.followers,
+    })
   } catch (exception) {
     next(exception)
   }
@@ -74,7 +84,16 @@ usersRouter.put("/follows/:id", async (request, response, next) => {
     const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
       new: true,
     }).populate("posts", { content: 1, date: 1 })
-    response.json(updatedUser.toJSON())
+    response.json({
+      id: updatedUser._id,
+      token: request.token,
+      username: updatedUser.username,
+      avatar: updatedUser.avatar,
+      posts: updatedUser.posts,
+      likedPosts: updatedUser.likedPosts,
+      follows: updatedUser.follows,
+      followers: updatedUser.followers,
+    })
   } catch (exception) {
     next(exception)
   }
@@ -91,7 +110,16 @@ usersRouter.put("/followers/:id", async (request, response, next) => {
     const updatedUser = await User.findByIdAndUpdate(request.params.id, user, {
       new: true,
     }).populate("posts", { content: 1, date: 1 })
-    response.json(updatedUser.toJSON())
+    response.json({
+      id: updatedUser._id,
+      token: request.token,
+      username: updatedUser.username,
+      avatar: updatedUser.avatar,
+      posts: updatedUser.posts,
+      likedPosts: updatedUser.likedPosts,
+      follows: updatedUser.follows,
+      followers: updatedUser.followers,
+    })
   } catch (exception) {
     next(exception)
   }

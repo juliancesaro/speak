@@ -13,7 +13,6 @@ const useStyles = makeStyles(() => ({
   icon: {
     "& > *": {
       color: "#8899a6",
-      cursor: "pointer",
     },
   },
 }))
@@ -146,8 +145,7 @@ const Post = ({
     try {
       if (window.confirm(`Delete post?`)) {
         await postService.deletePost(post.id)
-        const allPosts = await postService.getAll()
-        setPosts(allPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
+        setPosts(posts.filter((allPost) => allPost.id !== post.id))
         setUserPosts(userPosts.filter((userPost) => userPost.id !== post.id))
       }
     } catch (error) {
@@ -213,7 +211,7 @@ const Post = ({
       </div>
       <div className="post-right">
         {userPosts.some((userPost) => userPost.id === post.id) ? (
-          <div className="post-delete">
+          <div className="post-delete button">
             <DeleteIcon
               className={classes.icon}
               fontSize="small"
@@ -225,7 +223,7 @@ const Post = ({
         ) : (
           <div className="post-likes">
             <div
-              className={likeClicked ? "like-button" : ""}
+              className={likeClicked ? "like-button button" : "button"}
               style={{ paddingTop: 8, paddingRight: 6 }}
               onClick={
                 user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm

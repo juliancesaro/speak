@@ -62,18 +62,16 @@ const Navbar = ({
           </NavLink>
         </div>
         {user ? (
-          <div
-            className={`nav-${isMobile ? "right" : "top"}`}
-            onClick={handleLogout}
-          >
-            <ExitToAppIcon className={classes.icon} fontSize="large" />
+          <div className={`nav-${isMobile ? "right" : "bottom"}`}>
+            <div className="button" onClick={handleLogout}>
+              <ExitToAppIcon className={classes.icon} fontSize="large" />
+            </div>
           </div>
         ) : (
-          <div
-            className={`nav-${isMobile ? "right" : "bottom"}`}
-            onClick={toggleLoginForm}
-          >
-            <AccountBoxIcon className={classes.icon} fontSize="large" />
+          <div className={`nav-${isMobile ? "right" : "bottom"}`}>
+            <div className="button" onClick={toggleLoginForm}>
+              <AccountBoxIcon className={classes.icon} fontSize="large" />
+            </div>
           </div>
         )}
       </div>
