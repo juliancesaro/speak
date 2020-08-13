@@ -62,8 +62,6 @@ const App = () => {
     toggleRegisterForm()
   }
 
-  console.log(posts)
-
   return (
     <div className="App">
       {showLoginForm ? (

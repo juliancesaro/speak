@@ -144,9 +144,14 @@ const Post = ({
   const deletePost = async () => {
     try {
       if (window.confirm(`Delete post?`)) {
-        await postService.deletePost(post.id)
         setPosts(posts.filter((allPost) => allPost.id !== post.id))
-        setUserPosts(userPosts.filter((userPost) => userPost.id !== post.id))
+        window.localStorage.setItem(
+          "loggedShareitUserPosts",
+          JSON.stringify(
+            userPosts.filter((userPost) => userPost.id !== post.id)
+          )
+        )
+        await postService.deletePost(post.id)
       }
     } catch (error) {
       console.log(error)

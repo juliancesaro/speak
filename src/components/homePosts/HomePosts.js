@@ -21,6 +21,10 @@ const HomePosts = ({
     )
   )
 
+  const postsToShow = posts.filter(
+    (post) => user.follows.includes(post.user.id) || post.user.id === user.id
+  )
+
   useEffect(() => {
     postService.getAll().then((initialPosts) => {
       initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -38,7 +42,7 @@ const HomePosts = ({
           userLikes={userLikes}
           setUserLikes={setUserLikes}
           setPosts={setUserFollowingPosts}
-          posts={userFollowingPosts}
+          posts={postsToShow}
           userPosts={userPosts}
           setUserPosts={setUserPosts}
           toggleLoginForm={toggleLoginForm}
