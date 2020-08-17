@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import postService from "../../services/posts"
+import React from "react"
 import Posts from "../posts/Posts"
 
 const UserViewPosts = ({
@@ -11,65 +10,41 @@ const UserViewPosts = ({
   setUserLikes,
   posts,
   setPosts,
-  userPosts,
-  setUserPosts,
   toggleLoginForm,
   activeUserItem,
 }) => {
-  const [userAccountPosts, setUserAccountPosts] = useState(
-    posts.filter((post) =>
-      userAccount.posts.some((userPost) => userPost.id === post.id)
-    )
-  )
-  const [userAccountLikedPosts, setUserAccountLikedPosts] = useState(
-    posts.filter((post) =>
-      userAccount.likedPosts.some((userLikedPost) => userLikedPost === post.id)
-    )
+  const userAccountPosts = posts.filter(
+    (post) => post.user.id === userAccount.id
   )
 
-  // If a post is liked in user view, update the posts on the home page.
-  // When a post is liked, it does not immediately appear in likedPosts,
-  // Twitter also has this issue.
-  useEffect(() => {
-    postService.getAll().then((initialPosts) => {
-      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-      setPosts(initialPosts)
-    })
-  }, [userAccountPosts, setPosts])
-
-  useEffect(() => {
-    postService.getAll().then((initialPosts) => {
-      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-      setPosts(initialPosts)
-    })
-  }, [userAccountLikedPosts, setPosts])
+  const userLikedPosts = posts.filter((post) =>
+    userAccount.likedPosts.some((userLikedPost) => userLikedPost === post.id)
+  )
 
   return (
     <div className="useritems">
       {activeUserItem === "Posts" ? (
         <Posts
+          allPosts={posts}
           allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}
           setUserLikes={setUserLikes}
-          setPosts={setUserAccountPosts}
-          posts={userAccountPosts}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
+          setPosts={setPosts}
+          postsToShow={userAccountPosts}
           toggleLoginForm={toggleLoginForm}
         />
       ) : (
         <Posts
+          allPosts={posts}
           allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}
           setUserLikes={setUserLikes}
-          setPosts={setUserAccountLikedPosts}
-          posts={userAccountLikedPosts}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
+          setPosts={setPosts}
+          postsToShow={userLikedPosts}
           toggleLoginForm={toggleLoginForm}
         />
       )}

@@ -72,7 +72,6 @@ const LoginForm = ({
   toggleLoginForm,
   toggleRegisterLogin,
   setUser,
-  setUserPosts,
   setUserLikes,
 }) => {
   // States for input fields
@@ -94,15 +93,10 @@ const LoginForm = ({
         username: loginUsername,
         password: loginPassword,
       })
-      window.localStorage.setItem("loggedShareitUser", JSON.stringify(user))
-      window.localStorage.setItem(
-        "loggedShareitUserPosts",
-        JSON.stringify(user.posts)
-      )
+      window.localStorage.setItem("loggedSpeakUser", JSON.stringify(user))
       messageService.setToken(user.token)
       userService.setToken(user.token)
       setUser(user)
-      setUserPosts(user.posts)
       setUserLikes(user.likedPosts)
       setLoginSuccess(true)
       setMessageText("Login Successful!")

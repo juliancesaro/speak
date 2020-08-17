@@ -49,14 +49,7 @@ const useStyles = makeStyles(() => ({
 /**
  * Form handling post posting including user avatar.
  */
-const PostForm = ({
-  allUsers,
-  user,
-  setPosts,
-  setUserPosts,
-  posts,
-  userPosts,
-}) => {
+const PostForm = ({ allUsers, user, setPosts, posts }) => {
   const classes = useStyles()
   // State for input fields.
   const [newContent, setNewContent] = useState("")
@@ -80,12 +73,7 @@ const PostForm = ({
             .concat(returnedItem)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
         )
-        window.localStorage.setItem(
-          "loggedShareitUserPosts",
-          JSON.stringify(userPosts.concat(returnedItem))
-        )
         setNewContent("")
-        setUserPosts(userPosts.concat(returnedItem))
         setMessageText("Posted!")
         setAddItemSuccess(true)
         setTimeout(() => {

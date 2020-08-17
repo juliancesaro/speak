@@ -22,24 +22,16 @@ const useStyles = makeStyles(() => ({
 /**
  * Navbar containing NavLinks and login/logout buttons
  */
-const Navbar = ({
-  toggleLoginForm,
-  user,
-  setUser,
-  setUserLikes,
-  setUserPosts,
-}) => {
+const Navbar = ({ toggleLoginForm, user, setUser, setUserLikes }) => {
   const classes = useStyles()
   // Logs out user by clearing tokens, states, and browser local storage
   const handleLogout = () => {
     try {
       postService.clearToken()
       userService.clearToken()
-      window.localStorage.removeItem("loggedShareitUser")
-      window.localStorage.removeItem("loggedShareitUserPosts")
+      window.localStorage.removeItem("loggedSpeakUser")
       setUserLikes([])
       setUser(null)
-      setUserPosts([])
     } catch (exception) {
       console.log(exception)
     }

@@ -17,7 +17,6 @@ const App = () => {
   const [posts, setPosts] = useState(null)
   const [allUsers, setAllUsers] = useState([])
   const [user, setUser] = useState(null)
-  const [userPosts, setUserPosts] = useState([])
   const [userLikes, setUserLikes] = useState([])
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [showRegisterForm, setShowRegisterForm] = useState(false)
@@ -32,20 +31,13 @@ const App = () => {
     userService.getAll().then((allUsers) => {
       setAllUsers(allUsers)
     })
-    const loggedUserJSON = window.localStorage.getItem("loggedShareitUser")
+    const loggedUserJSON = window.localStorage.getItem("loggedSpeakUser")
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       postService.setToken(user.token)
       userService.setToken(user.token)
       setUserLikes(user.likedPosts)
-    }
-    const loggedUserPostsJSON = window.localStorage.getItem(
-      "loggedShareitUserPosts"
-    )
-    if (loggedUserPostsJSON) {
-      const userPosts = JSON.parse(loggedUserPostsJSON)
-      setUserPosts(userPosts)
     }
   }, [])
 
@@ -70,7 +62,6 @@ const App = () => {
             toggleLoginForm={toggleLoginForm}
             toggleRegisterLogin={toggleRegisterLogin}
             setUser={setUser}
-            setUserPosts={setUserPosts}
             setUserLikes={setUserLikes}
           />
         </Form>
@@ -89,7 +80,6 @@ const App = () => {
           user={user}
           setUser={setUser}
           setUserLikes={setUserLikes}
-          setUserPosts={setUserPosts}
         />
         <Switch>
           {allUsers.map((allUser) => (
@@ -103,8 +93,6 @@ const App = () => {
                 setUserLikes={setUserLikes}
                 posts={posts}
                 setPosts={setPosts}
-                userPosts={userPosts}
-                setUserPosts={setUserPosts}
                 userAccount={allUser}
                 toggleLoginForm={toggleLoginForm}
               />
@@ -119,8 +107,6 @@ const App = () => {
               setUserLikes={setUserLikes}
               posts={posts}
               setPosts={setPosts}
-              userPosts={userPosts}
-              setUserPosts={setUserPosts}
               toggleLoginForm={toggleLoginForm}
             />
           </Route>

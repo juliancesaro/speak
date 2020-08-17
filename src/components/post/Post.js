@@ -22,16 +22,14 @@ const useStyles = makeStyles(() => ({
  * and a 'like' button.
  */
 const Post = ({
+  allPosts,
   allUsers,
   user,
   setUser,
   userLikes,
   setUserLikes,
-  posts,
   setPosts,
   post,
-  userPosts,
-  setUserPosts,
   toggleLoginForm,
 }) => {
   const classes = useStyles()
@@ -86,7 +84,7 @@ const Post = ({
       // Setting states before requests to hide the server response delay
       setUserLikes(userLikes.concat(post.id))
       const newPost = { ...post, likes: likes.concat(user.id) }
-      const updatedPosts = posts
+      const updatedPosts = allPosts
         .filter((oldPost) => oldPost.id !== post.id)
         .concat(newPost)
       setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
@@ -98,7 +96,7 @@ const Post = ({
         likedPosts: user.likedPosts.concat(post.id),
       })
       window.localStorage.setItem(
-        "loggedShareitUser",
+        "loggedSpeakUser",
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
@@ -117,7 +115,7 @@ const Post = ({
         ...post,
         likes: likes.filter((like) => like !== user.id),
       }
-      const updatedPosts = posts
+      const updatedPosts = allPosts
         .filter((oldPost) => oldPost.id !== post.id)
         .concat(newPost)
       setPosts(updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date)))
@@ -131,7 +129,7 @@ const Post = ({
         ),
       })
       window.localStorage.setItem(
-        "loggedShareitUser",
+        "loggedSpeakUser",
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
@@ -144,13 +142,7 @@ const Post = ({
   const deletePost = async () => {
     try {
       if (window.confirm(`Delete post?`)) {
-        setPosts(posts.filter((allPost) => allPost.id !== post.id))
-        window.localStorage.setItem(
-          "loggedShareitUserPosts",
-          JSON.stringify(
-            userPosts.filter((userPost) => userPost.id !== post.id)
-          )
-        )
+        setPosts(allPosts.filter((allPost) => allPost.id !== post.id))
         await postService.deletePost(post.id)
       }
     } catch (error) {
@@ -182,7 +174,6 @@ const Post = ({
           >
             <p className="post-user">{username}</p>
           </NavLink>
-
           {
             // Map each item in newContent to its own span, if the mentioned
             // user exists, create a link to their page
@@ -215,7 +206,7 @@ const Post = ({
         </div>
       </div>
       <div className="post-right">
-        {userPosts.some((userPost) => userPost.id === post.id) ? (
+        {user && post.user.id === user.id ? (
           <div className="post-delete button">
             <DeleteIcon
               className={classes.icon}

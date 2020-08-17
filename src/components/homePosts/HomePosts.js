@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import postService from "../../services/posts"
+import React from "react"
 import Posts from "../posts/Posts"
 
 const HomePosts = ({
@@ -10,54 +9,37 @@ const HomePosts = ({
   setUserLikes,
   posts,
   setPosts,
-  userPosts,
-  setUserPosts,
   toggleLoginForm,
   activePostsItem,
 }) => {
-  const [userFollowingPosts, setUserFollowingPosts] = useState(
-    posts.filter(
-      (post) => user.follows.includes(post.user.id) || post.user.id === user.id
-    )
-  )
-
   const postsToShow = posts.filter(
     (post) => user.follows.includes(post.user.id) || post.user.id === user.id
   )
-
-  useEffect(() => {
-    postService.getAll().then((initialPosts) => {
-      initialPosts.sort((a, b) => new Date(b.date) - new Date(a.date))
-      setPosts(initialPosts)
-    })
-  }, [userFollowingPosts, setPosts])
 
   return (
     <div className="home-posts">
       {activePostsItem === "Following" ? (
         <Posts
-          allUsers={allUsers}
-          user={user}
-          setUser={setUser}
-          userLikes={userLikes}
-          setUserLikes={setUserLikes}
-          setPosts={setUserFollowingPosts}
-          posts={postsToShow}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
-          toggleLoginForm={toggleLoginForm}
-        />
-      ) : (
-        <Posts
+          allPosts={posts}
           allUsers={allUsers}
           user={user}
           setUser={setUser}
           userLikes={userLikes}
           setUserLikes={setUserLikes}
           setPosts={setPosts}
-          posts={posts}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
+          postsToShow={postsToShow}
+          toggleLoginForm={toggleLoginForm}
+        />
+      ) : (
+        <Posts
+          allPosts={posts}
+          allUsers={allUsers}
+          user={user}
+          setUser={setUser}
+          userLikes={userLikes}
+          setUserLikes={setUserLikes}
+          setPosts={setPosts}
+          postsToShow={posts}
           toggleLoginForm={toggleLoginForm}
         />
       )}

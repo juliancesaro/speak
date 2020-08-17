@@ -17,8 +17,6 @@ const Home = ({
   setUserLikes,
   posts,
   setPosts,
-  userPosts,
-  setUserPosts,
   toggleLoginForm,
 }) => {
   const [activePostsItem, setActivePostsItem] = useState("Following")
@@ -34,16 +32,13 @@ const Home = ({
     <div className={`home-wrapper${isMobile ? "-mobile" : ""}`}>
       <div className={`home${isMobile ? "-mobile" : ""}`}>
         <h1>Home</h1>
-
         {user ? (
           <>
             <PostForm
               allUsers={allUsers}
               user={user}
               setPosts={setPosts}
-              setUserPosts={setUserPosts}
               posts={posts}
-              userPosts={userPosts}
             />
             <div className="posts-nav">
               <div
@@ -72,8 +67,6 @@ const Home = ({
                 setUserLikes={setUserLikes}
                 setPosts={setPosts}
                 posts={posts}
-                userPosts={userPosts}
-                setUserPosts={setUserPosts}
                 toggleLoginForm={toggleLoginForm}
                 activePostsItem={activePostsItem}
               />
@@ -81,19 +74,20 @@ const Home = ({
               <Loading />
             )}
           </>
-        ) : (
+        ) : posts ? (
           <Posts
+            allPosts={posts}
             allUsers={allUsers}
             user={user}
             setUser={setUser}
             userLikes={userLikes}
             setUserLikes={setUserLikes}
             setPosts={setPosts}
-            posts={posts}
-            userPosts={userPosts}
-            setUserPosts={setUserPosts}
+            postsToShow={posts}
             toggleLoginForm={toggleLoginForm}
           />
+        ) : (
+          <Loading />
         )}
       </div>
     </div>

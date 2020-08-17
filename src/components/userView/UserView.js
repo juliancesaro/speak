@@ -16,8 +16,6 @@ const UserView = ({
   setUserLikes,
   posts,
   setPosts,
-  userPosts,
-  setUserPosts,
   userAccount,
   toggleLoginForm,
 }) => {
@@ -37,7 +35,7 @@ const UserView = ({
         }
       )
       window.localStorage.setItem(
-        "loggedShareitUser",
+        "loggedSpeakUser",
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
@@ -65,7 +63,7 @@ const UserView = ({
         }
       )
       window.localStorage.setItem(
-        "loggedShareitUser",
+        "loggedSpeakUser",
         JSON.stringify(returnedUser)
       )
       const updatedAllUsers = allUsers
@@ -175,8 +173,6 @@ const UserView = ({
             setUserLikes={setUserLikes}
             setPosts={setPosts}
             posts={posts}
-            userPosts={userPosts}
-            setUserPosts={setUserPosts}
             toggleLoginForm={toggleLoginForm}
             activeUserItem={activeUserItem}
           />
