@@ -83,10 +83,7 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
   const [messageText, setMessageText] = useState("")
 
   // States for password validation.
-  const [passwordLen15, setPasswordLen15] = useState(null)
-  const [passwordLowercase, setPasswordLowercase] = useState(null)
-  const [passwordNumber, setPasswordNumber] = useState(null)
-  const [passwordLen8, setPasswordLen8] = useState(null)
+  const [passwordLenCorrect, setPasswordLenCorrect] = useState(null)
   const [passwordCorrect, setPasswordCorrect] = useState(null)
 
   // Makes request to the server to register user.
@@ -158,35 +155,12 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
     } else {
       setPasswordInputError(true)
     }
-    if (input.length >= 15) {
+    if (input.length >= 8) {
       setPasswordCorrect(true)
-      setPasswordLen15(true)
-      setPasswordLen8(null)
-      setPasswordNumber(null)
-      setPasswordLowercase(null)
-    } else if (input.match(/^(?=.*\d)(?=.*[a-z]).{8,}$/)) {
-      setPasswordCorrect(true)
-      setPasswordLen15(null)
-      setPasswordLen8(true)
-      setPasswordNumber(true)
-      setPasswordLowercase(true)
-    } else if (input.length < 15) {
-      setPasswordLen15(false)
-      if (input.length >= 8) {
-        setPasswordLen8(true)
-      } else if (input.length < 8) {
-        setPasswordLen8(false)
-      }
-      if (input.match(/\d/)) {
-        setPasswordNumber(true)
-      } else if (!input.match(/\d/)) {
-        setPasswordNumber(false)
-      }
-      if (input.match(/[a-z]/)) {
-        setPasswordLowercase(true)
-      } else if (!input.match(/[a-z]/)) {
-        setPasswordLowercase(false)
-      }
+      setPasswordLenCorrect(true)
+    } else if (input.length < 8) {
+      setPasswordCorrect(false)
+      setPasswordLenCorrect(false)
     }
   }
 
@@ -352,38 +326,12 @@ const RegisterForm = ({ toggleRegisterForm, toggleRegisterLogin }) => {
             </FormControl>
             <span className="validation">
               <p>Should be</p>
-              {passwordLen15 ? (
-                <p className="true">at least 15 characters</p>
-              ) : passwordLen15 === false ? (
-                <p className="false">at least 15 characters</p>
-              ) : (
-                <p>at least 15 characters</p>
-              )}
-              <p>OR</p>
-              {passwordLen8 ? (
+              {passwordLenCorrect ? (
                 <p className="true">at least 8 characters</p>
-              ) : passwordLen8 === false ? (
+              ) : passwordLenCorrect === false ? (
                 <p className="false">at least 8 characters</p>
               ) : (
                 <p>at least 8 characters</p>
-              )}
-              {passwordNumber ? (
-                <p className="true">including a number</p>
-              ) : passwordNumber === false ? (
-                <p className="false">including a number</p>
-              ) : (
-                <p>including a number</p>
-              )}
-              {passwordLowercase ? (
-                <p className="true" id="lowercase">
-                  and a lowercase letter
-                </p>
-              ) : passwordLowercase === false ? (
-                <p className="false" id="lowercase">
-                  and a lowercase letter
-                </p>
-              ) : (
-                <p id="lowercase">and a lowercase letter</p>
               )}
               <p>.</p>
             </span>
