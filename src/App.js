@@ -9,6 +9,7 @@ import LoginForm from "./components/loginForm/LoginForm"
 import RegisterForm from "./components/registerForm/RegisterForm"
 import Home from "./components/home/Home"
 import UserView from "./components/userView/UserView"
+import Following from "./components/following/Following"
 
 /**
  * Main component containing the structure of the app.
@@ -82,6 +83,20 @@ const App = () => {
           setUserLikes={setUserLikes}
         />
         <Switch>
+          {allUsers.map((allUser) => (
+            <Route
+              key={allUser.username}
+              path={`/user/${allUser.username}/followers`}
+            ></Route>
+          ))}
+          {allUsers.map((allUser) => (
+            <Route
+              key={allUser.username}
+              path={`/user/${allUser.username}/following`}
+            >
+              <Following />
+            </Route>
+          ))}
           {allUsers.map((allUser) => (
             <Route key={allUser.username} path={`/user/${allUser.username}`}>
               <UserView

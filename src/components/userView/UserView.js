@@ -5,6 +5,7 @@ import blank_user from "../../assets/blank_user.png"
 import Button from "@material-ui/core/Button/Button"
 import UserViewPosts from "../userViewPosts/UserViewPosts"
 import Loading from "../loading/Loading"
+import { NavLink } from "react-router-dom"
 import { isMobile } from "react-device-detect"
 
 const UserView = ({
@@ -96,12 +97,22 @@ const UserView = ({
             <h2>{userAccount.username}</h2>
             <div className="user-follow-items">
               <div className="user-follow-left">
-                <p className="user-following">
+                <NavLink
+                  exact
+                  activeClassName="user-follow-active"
+                  className="user-follow"
+                  to={`/user/${userAccount.username}/following`}
+                >
                   <strong>{userAccount.follows.length}</strong> Following
-                </p>
-                <p className="user-followers">
+                </NavLink>
+                <NavLink
+                  exact
+                  activeClassName="user-follow-active"
+                  className="user-follow"
+                  to={`/user/${userAccount.username}/followers`}
+                >
                   <strong>{userAccount.followers.length}</strong> Followers
-                </p>
+                </NavLink>
               </div>
               <div className="user-follow-right">
                 {user ? (

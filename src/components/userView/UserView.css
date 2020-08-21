@@ -1,19 +1,18 @@
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 681px) {
   .userview {
-    min-height: calc(100vh);
+    min-height: 100vh;
     width: 550px;
     margin: 0 auto;
     border-left: 1px solid #3b4353;
     border-right: 1px solid #3b4353;
   }
 }
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 680px) {
   .userview {
-    min-height: calc(100vh);
-    width: 90%;
-    margin: 0 auto;
+    min-height: 100vh;
+    width: calc(100% - 66px);
+    margin-left: 65px;
     border-left: 1px solid #3b4353;
-    border-right: 1px solid #3b4353;
   }
 }
 .userview-wrapper {
@@ -39,7 +38,9 @@
 .user-follow-left {
   display: flex;
 }
-.user-following {
+.user-follow {
+  text-decoration: none;
+  color: white;
   margin-right: 20px;
 }
 .user-nav {
