@@ -24,7 +24,7 @@ const HashtagView = ({
   return (
     <div className={`hashtagview-wrapper${isMobile ? '-mobile' : ''}`}>
       <div className={`hashtagview${isMobile ? '-mobile' : ''}`}>
-        <h1>{hashtag}</h1>
+        <h1>#{hashtag}</h1>
         {hashtagPosts ? (
           <Posts
             allPosts={allPosts}
