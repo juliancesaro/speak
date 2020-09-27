@@ -1,5 +1,5 @@
-import React from "react"
-import Posts from "../posts/Posts"
+import React from 'react'
+import Posts from '../posts/Posts'
 
 const UserViewPosts = ({
   allUsers,
@@ -23,7 +23,7 @@ const UserViewPosts = ({
 
   return (
     <div className="useritems">
-      {activeUserItem === "Posts" ? (
+      {activeUserItem === 'Posts' ? (
         <Posts
           allPosts={posts}
           allUsers={allUsers}

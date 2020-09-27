@@ -46,11 +46,11 @@
 .userlink:hover {
   text-decoration: underline;
 }
-.taggeduserlink {
+.content-link {
   text-decoration: none;
   color: #00adb5;
 }
-.taggeduserlink:hover {
+.content-link:hover {
   text-decoration: underline;
 }
 .userimglink {
@@ -85,7 +85,7 @@
 .like-button {
   animation-duration: 1.5s;
   animation-iteration-count: 1;
-  animation-name: wave;
+  animation-name: rotate;
   animation-fill-mode: forwards;
   transform-origin: 40% 60%;
 }
@@ -94,7 +94,7 @@
   text-align: right;
   margin: 0;
 }
-@keyframes wave {
+@keyframes rotate {
   0% {
     transform: rotate(0deg);
   }

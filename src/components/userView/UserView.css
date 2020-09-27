@@ -41,7 +41,10 @@
 .user-follow {
   text-decoration: none;
   color: white;
-  margin-right: 20px;
+  margin: 20px 20px 0 0;
+}
+.user-follow:hover {
+  text-decoration: underline;
 }
 .user-nav {
   display: flex;

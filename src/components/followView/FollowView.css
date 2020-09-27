@@ -1,5 +1,5 @@
 @media only screen and (min-width: 600px) {
-  .following {
+  .followview {
     min-height: calc(100vh);
     width: 550px;
     margin: 0 auto;
@@ -8,42 +8,47 @@
   }
 }
 @media only screen and (max-width: 599px) {
-  .following {
-    min-height: calc(100vh);
-    width: 90%;
-    margin: 0 auto;
+  .followview {
+    min-height: 100vh;
+    width: calc(100% - 66px);
+    margin-left: 65px;
     border-left: 1px solid #3b4353;
-    border-right: 1px solid #3b4353;
   }
 }
-.following-nav {
+.followview-nav {
   display: flex;
   justify-content: space-evenly;
   font-weight: bold;
   margin-bottom: 10px;
   border-bottom: 1px solid #393e46;
+  color: white;
 }
-.following-nav-following {
+.followview-nav-following {
   text-align: center;
   width: 50%;
   cursor: pointer;
   opacity: 1;
   transition: background-color 0.2s ease;
 }
-.following-nav-followers {
+.followview-nav-followers {
   text-align: center;
   width: 50%;
   cursor: pointer;
   opacity: 1;
   transition: background-color 0.2s ease;
 }
-.following-nav-following:hover {
+.followview-nav-following:hover {
   background-color: rgba(0, 173, 181, 0.5);
 }
-.following-nav-followers:hover {
+.followview-nav-followers:hover {
   background-color: rgba(0, 173, 181, 0.5);
 }
-.user-nav-posts.active {
+.followview-nav-following.active {
+  text-align: center;
+  width: 50%;
+  border-bottom: 2px solid #00adb5;
+}
+.followview-nav-followers.active {
   text-align: center;
   width: 50%;
   border-bottom: 2px solid #00adb5;

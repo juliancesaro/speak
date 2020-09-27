@@ -1,46 +1,45 @@
-import React, { useState } from "react"
-import "./PostForm.css"
-import { NavLink } from "react-router-dom"
-import postService from "../../services/posts"
-//import UserList from "../userList/UserList"
-import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
-import Message from "../message/Message"
-import blank_user from "../../assets/blank_user.png"
-import { makeStyles } from "@material-ui/core/styles"
+import React, { useState } from 'react'
+import './PostForm.css'
+import { NavLink } from 'react-router-dom'
+import postService from '../../services/posts'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Message from '../message/Message'
+import blank_user from '../../assets/blank_user.png'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
   message: {
-    "& > *": {
-      backgroundColor: "#3b4353",
-      color: "white",
-      "&:hover": {
-        backgroundColor: "#3b4353",
+    '& > *': {
+      backgroundColor: '#3b4353',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#3b4353',
       },
-      "&.MuiFormHelperText-root": {
-        "&.Mui-focused": {
-          backgroundColor: "#222831",
+      '&.MuiFormHelperText-root': {
+        '&.Mui-focused': {
+          backgroundColor: '#222831',
         },
-        "&.Mui-error": {
-          color: "#f44336",
+        '&.Mui-error': {
+          color: '#f44336',
         },
-        backgroundColor: "#222831",
-        color: "#f44336",
+        backgroundColor: '#222831',
+        color: '#f44336',
       },
-      "&.MuiFormLabel-root": {
-        "&.Mui-error": {
-          color: "#f44336",
+      '&.MuiFormLabel-root': {
+        '&.Mui-error': {
+          color: '#f44336',
         },
-        color: "#8899a6",
+        color: '#8899a6',
       },
-      "&.Mui-focused": {
-        backgroundColor: "#3b4353",
+      '&.Mui-focused': {
+        backgroundColor: '#3b4353',
       },
-      "&.MuiFilledInput-underline:before": {
-        borderBottom: "2px solid #6f7b9b",
+      '&.MuiFilledInput-underline:before': {
+        borderBottom: '2px solid #6f7b9b',
       },
-      "&.MuiFilledInput-underline:after": {
-        borderBottom: "2px solid #12adb3",
+      '&.MuiFilledInput-underline:after': {
+        borderBottom: '2px solid #12adb3',
       },
     },
   },
@@ -52,12 +51,12 @@ const useStyles = makeStyles(() => ({
 const PostForm = ({ allUsers, user, setPosts, posts }) => {
   const classes = useStyles()
   // State for input fields.
-  const [newContent, setNewContent] = useState("")
+  const [newContent, setNewContent] = useState('')
 
   // States for error handling.
   const [addItemSuccess, setAddItemSuccess] = useState(null)
-  const [contentInputError, setContentInputError] = useState("")
-  const [messageText, setMessageText] = useState("")
+  const [contentInputError, setContentInputError] = useState('')
+  const [messageText, setMessageText] = useState('')
 
   // If no input error, request is sent to the server to post form input
   const addItem = async (event) => {
@@ -73,22 +72,22 @@ const PostForm = ({ allUsers, user, setPosts, posts }) => {
             .concat(returnedItem)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
         )
-        setNewContent("")
-        setMessageText("Posted!")
+        setNewContent('')
+        setMessageText('Posted!')
         setAddItemSuccess(true)
         setTimeout(() => {
           setAddItemSuccess(null)
         }, 1000)
       } else {
-        throw new Error("Content too long!")
+        throw new Error('Content too long!')
       }
     } catch (error) {
       console.log(error)
       setAddItemSuccess(false)
-      if (error.message === "Content too long!") {
+      if (error.message === 'Content too long!') {
         setMessageText(error.message)
       } else {
-        setMessageText("Please try again!")
+        setMessageText('Please try again!')
       }
     }
   }
@@ -97,18 +96,18 @@ const PostForm = ({ allUsers, user, setPosts, posts }) => {
     const input = String(event.target.value)
     setNewContent(input)
     if (input.length > 200) {
-      setContentInputError("Content must be less than 200 characters!")
+      setContentInputError('Content must be less than 200 characters!')
     } else {
-      setContentInputError("")
+      setContentInputError('')
     }
   }
 
   return (
     <div className="postform">
       {addItemSuccess ? (
-        <Message type={"success"} message={messageText} />
+        <Message type={'success'} message={messageText} />
       ) : addItemSuccess === false ? (
-        <Message type={"error"} message={messageText} />
+        <Message type={'error'} message={messageText} />
       ) : null}
       <form onSubmit={addItem}>
         <div className="postform-items">
@@ -134,19 +133,17 @@ const PostForm = ({ allUsers, user, setPosts, posts }) => {
                 type="text"
                 name="message"
                 label="What's Happening?"
-                error={contentInputError !== ""}
+                error={contentInputError !== ''}
                 value={newContent}
                 onChange={handleContentChange}
                 helperText={contentInputError}
                 multiline
                 variant="filled"
                 style={{
-                  width: "100%",
+                  width: '100%',
                   minWidth: 170,
                 }}
               />
-
-              {/* <UserList allUsers={allUsers} /> */}
             </div>
             <div className="actions">
               <Button variant="contained" type="submit">

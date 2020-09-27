@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react"
-import "./Post.css"
-import { NavLink } from "react-router-dom"
-import postService from "../../services/posts"
-import userService from "../../services/users"
-import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
-import DeleteIcon from "@material-ui/icons/Delete"
-import blank_user from "../../assets/blank_user.png"
-import { makeStyles } from "@material-ui/core/styles"
+import React, { useState, useEffect } from 'react'
+import './Post.css'
+import { NavLink } from 'react-router-dom'
+import postService from '../../services/posts'
+import userService from '../../services/users'
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined'
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
+import DeleteIcon from '@material-ui/icons/Delete'
+import blank_user from '../../assets/blank_user.png'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
   icon: {
-    "& > *": {
-      color: "#8899a6",
+    '& > *': {
+      color: '#8899a6',
     },
   },
 }))
@@ -52,28 +52,28 @@ const Post = ({
   }, [userLikes, likedByUser, post.id])
 
   // Calculate post time
-  var unit = "s"
+  var unit = 's'
   const currDate = new Date()
   const postDate = new Date(post.date)
   var timeDiff = currDate - postDate
   timeDiff = Math.round(timeDiff / 1000)
   if (timeDiff >= 2592000) {
-    timeDiff = `${postDate.toLocaleString("default", {
-      month: "short",
+    timeDiff = `${postDate.toLocaleString('default', {
+      month: 'short',
     })} ${postDate.getDate().toString()}`
-    unit = ""
+    unit = ''
   } else if (timeDiff >= 604800) {
     timeDiff = Math.round(timeDiff / 604800)
-    unit = "w"
+    unit = 'w'
   } else if (timeDiff >= 86400) {
     timeDiff = Math.round(timeDiff / 86400)
-    unit = "d"
+    unit = 'd'
   } else if (timeDiff >= 3600) {
     timeDiff = Math.round(timeDiff / 3600)
-    unit = "h"
+    unit = 'h'
   } else if (timeDiff >= 60) {
     timeDiff = Math.round(timeDiff / 60)
-    unit = "m"
+    unit = 'm'
   }
 
   // Request is sent to server to add curr user to post 'likes' field and
@@ -96,7 +96,7 @@ const Post = ({
         likedPosts: user.likedPosts.concat(post.id),
       })
       window.localStorage.setItem(
-        "loggedSpeakUser",
+        'loggedSpeakUser',
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
@@ -129,7 +129,7 @@ const Post = ({
         ),
       })
       window.localStorage.setItem(
-        "loggedSpeakUser",
+        'loggedSpeakUser',
         JSON.stringify(returnedUser)
       )
       setUser(returnedUser)
@@ -151,7 +151,7 @@ const Post = ({
   }
 
   // Split the content where there is a mentioned user.
-  var newContent = content.split(/([@][\w]+)/)
+  var newContent = content.split(/([@#][\w]+)/)
 
   return (
     <div className="post">
@@ -178,8 +178,8 @@ const Post = ({
             // Map each item in newContent to its own span, if the mentioned
             // user exists, create a link to their page
             newContent.map((span) => {
-              if (span[0] === "@") {
-                const taggedUser = span.split("@")[1]
+              if (span[0] === '@') {
+                const taggedUser = span.split('@')[1]
                 if (
                   allUsers.some((allUser) => allUser.username === taggedUser)
                 ) {
@@ -187,7 +187,7 @@ const Post = ({
                     <NavLink
                       key={span}
                       exact
-                      className="taggeduserlink"
+                      className="content-link"
                       to={`/user/${taggedUser}`}
                     >
                       <span>{span}</span>
@@ -196,7 +196,19 @@ const Post = ({
                 } else {
                   return <span key={span}>{span}</span>
                 }
-              } else if (span === "") {
+              } else if (span[0] === '#') {
+                const hashtag = span.split('#')[1]
+                return (
+                  <NavLink
+                    key={span}
+                    exact
+                    className="content-link"
+                    to={`/hashtag/${hashtag}`}
+                  >
+                    <span>{span}</span>
+                  </NavLink>
+                )
+              } else if (span === '') {
                 return null
               } else {
                 return <span key={span}>{span}</span>
@@ -219,7 +231,7 @@ const Post = ({
         ) : (
           <div className="post-likes">
             <div
-              className={likeClicked ? "like-button button" : "button"}
+              className={likeClicked ? 'like-button button' : 'button'}
               style={{ paddingTop: 8, paddingRight: 6 }}
               onClick={
                 user ? (likedByUser ? unlikePost : likePost) : toggleLoginForm

@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react"
-import "./App.css"
-import { HashRouter, Route, Switch } from "react-router-dom"
-import postService from "./services/posts"
-import userService from "./services/users"
-import Navbar from "./components/navbar/Navbar"
-import Form from "./components/form/Form"
-import LoginForm from "./components/loginForm/LoginForm"
-import RegisterForm from "./components/registerForm/RegisterForm"
-import Home from "./components/home/Home"
-import UserView from "./components/userView/UserView"
-import Following from "./components/following/Following"
+import React, { useState, useEffect } from 'react'
+import './App.css'
+import { HashRouter, Route, Switch } from 'react-router-dom'
+import postService from './services/posts'
+import userService from './services/users'
+import Navbar from './components/navbar/Navbar'
+import Form from './components/form/Form'
+import LoginForm from './components/loginForm/LoginForm'
+import RegisterForm from './components/registerForm/RegisterForm'
+import Home from './components/home/Home'
+import UserView from './components/userView/UserView'
+import FollowView from './components/followView/FollowView'
+import HashtagView from './components/hashtagView/HashtagView'
 
 /**
  * Main component containing the structure of the app.
@@ -32,7 +33,7 @@ const App = () => {
     userService.getAll().then((allUsers) => {
       setAllUsers(allUsers)
     })
-    const loggedUserJSON = window.localStorage.getItem("loggedSpeakUser")
+    const loggedUserJSON = window.localStorage.getItem('loggedSpeakUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -83,36 +84,34 @@ const App = () => {
           setUserLikes={setUserLikes}
         />
         <Switch>
-          {allUsers.map((allUser) => (
-            <Route
-              key={allUser.username}
-              path={`/user/${allUser.username}/followers`}
-            ></Route>
-          ))}
-          {allUsers.map((allUser) => (
-            <Route
-              key={allUser.username}
-              path={`/user/${allUser.username}/following`}
-            >
-              <Following />
-            </Route>
-          ))}
-          {allUsers.map((allUser) => (
-            <Route key={allUser.username} path={`/user/${allUser.username}`}>
-              <UserView
-                allUsers={allUsers}
-                setAllUsers={setAllUsers}
-                user={user}
-                setUser={setUser}
-                userLikes={userLikes}
-                setUserLikes={setUserLikes}
-                posts={posts}
-                setPosts={setPosts}
-                userAccount={allUser}
-                toggleLoginForm={toggleLoginForm}
-              />
-            </Route>
-          ))}
+          <Route path="/hashtag/:hashtag">
+            <HashtagView
+              allPosts={posts}
+              allUsers={allUsers}
+              user={user}
+              setUser={setUser}
+              userLikes={userLikes}
+              setUserLikes={setUserLikes}
+              setPosts={setPosts}
+              toggleLoginForm={toggleLoginForm}
+            />
+          </Route>
+          <Route path="/user/:username/following">
+            <FollowView allUsers={allUsers} user={user} />
+          </Route>
+          <Route path="/user/:username">
+            <UserView
+              allUsers={allUsers}
+              setAllUsers={setAllUsers}
+              user={user}
+              setUser={setUser}
+              userLikes={userLikes}
+              setUserLikes={setUserLikes}
+              posts={posts}
+              setPosts={setPosts}
+              toggleLoginForm={toggleLoginForm}
+            />
+          </Route>
           <Route path="/">
             <Home
               allUsers={allUsers}
