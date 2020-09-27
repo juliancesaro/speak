@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './FollowView.css'
 import { useParams } from 'react-router-dom'
+import { isMobile } from 'react-device-detect'
 import UserList from '../userList/UserList'
 
 const FollowView = ({ allUsers, user }) => {
@@ -28,30 +29,32 @@ const FollowView = ({ allUsers, user }) => {
   }
 
   return (
-    <div className="followview">
-      <div className="followview-nav">
-        <div
-          className={`followview-nav-followers${
-            activeNavItem === 'Followers' ? ' active' : ''
-          }`}
-          onClick={setFollowersActive}
-        >
-          <p>Followers</p>
+    <div className={`followview-wrapper${isMobile ? '-mobile' : ''}`}>
+      <div className={`followview${isMobile ? '-mobile' : ''}`}>
+        <div className="followview-nav">
+          <div
+            className={`followview-nav-followers${
+              activeNavItem === 'Followers' ? ' active' : ''
+            }`}
+            onClick={setFollowersActive}
+          >
+            <p>Followers</p>
+          </div>
+          <div
+            className={`followview-nav-following${
+              activeNavItem === 'Following' ? ' active' : ''
+            }`}
+            onClick={setFollowingActive}
+          >
+            <p>Following</p>
+          </div>
         </div>
-        <div
-          className={`followview-nav-following${
-            activeNavItem === 'Following' ? ' active' : ''
-          }`}
-          onClick={setFollowingActive}
-        >
-          <p>Following</p>
-        </div>
+        {activeNavItem === 'Followers' ? (
+          <UserList users={userAccountFollowers} />
+        ) : (
+          <UserList users={userAccountFollowing} />
+        )}
       </div>
-      {activeNavItem === 'Followers' ? (
-        <UserList users={userAccountFollowers} />
-      ) : (
-        <UserList users={userAccountFollowing} />
-      )}
     </div>
   )
 }

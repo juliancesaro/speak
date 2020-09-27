@@ -25,6 +25,7 @@
   padding: 20px;
   border-bottom: 1px solid #3b4353;
 }
+/** Mobile CSS */
 .hashtagview-wrapper-mobile {
   min-height: calc(100vh);
   background-color: #222831;

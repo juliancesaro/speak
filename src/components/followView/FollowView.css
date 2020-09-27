@@ -53,3 +53,18 @@
   width: 50%;
   border-bottom: 2px solid #00adb5;
 }
+/** Mobile CSS */
+.followview-wrapper-mobile {
+  min-height: calc(100vh);
+  background-color: #222831;
+  color: white;
+}
+.followview-mobile {
+  min-height: 100vh;
+  padding-bottom: 55px;
+}
+.followview-mobile > h1 {
+  margin: 0;
+  padding: 20px;
+  border-bottom: 1px solid #3b4353;
+}
