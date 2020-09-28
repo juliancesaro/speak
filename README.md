@@ -1,36 +1,34 @@
-# COMP3120 Social Media Project
+# Speak - A social media web app
 
 Live demo here: https://lit-beyond-07329.herokuapp.com/
 
-An individual project for COMP3120 Advanced Web Devleopment
+Users can:
 
-The project should implement a micro-blog similar to Twitter that supports at least:
+* Create an account
+* Log in
+* Post and like messages
+* View other user's posts and likes
+* Follow other users
+* View other user's followers and who they are folowing
+* User mentions and hashtags also supported
 
-* User registration, login, user profile including an avatar
-* Users post short messages up to N characters for some value of N
-* Messages can contain user mentions @username and #hashtags 
-* Users can 'like' messages
-* Users can follow other users
-
-The detailed design of the application is up to you but it should at least have:
-
-* a page for non-authenticated users showing the most recent messages
-* a page for authenticated users showing messages from followed users
-* a profile page for each user
-* some display of likes with messages
-
-Some sample data is provided in sampledata.json that includes a number of users
-and 100 sample posts.  You can modify this as you wish. Note that plain text
-passwords are included for each user which is not a good idea.
-
-Run a sample server with:
-
+## Scripts
 ```
-npx json-server --port 3001 --watch sampledata.json 
+npm install
 ```
-
-see [the text](https://fullstackopen.com/en/part2/getting_data_from_server) for details of 
-using json-server.
+Installs all the required dependencies to run the application.
+```
+npm run dev
+```
+Starts the backend using nodemon for development.
+```
+npm start
+```
+Starts the frontend using react-scripts.
+```
+npm run deploy
+```
+Creates a production build of the application and deploys to Heroku.
 
 
 
