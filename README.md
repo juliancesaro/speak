@@ -10,6 +10,7 @@ Users can:
 * View other user's posts and likes
 * Follow other users
 * View other user's followers and who they are folowing
+
 User mentions and hashtags also supported.
 
 ## Scripts
