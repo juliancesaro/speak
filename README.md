@@ -2,15 +2,15 @@
 
 Live demo here: https://lit-beyond-07329.herokuapp.com/
 
+## Features
 Users can:
-
 * Create an account
 * Log in
 * Post and like messages
 * View other user's posts and likes
 * Follow other users
 * View other user's followers and who they are folowing
-* User mentions and hashtags also supported
+User mentions and hashtags also supported.
 
 ## Scripts
 ```
@@ -29,6 +29,12 @@ Starts the frontend using react-scripts.
 npm run deploy
 ```
 Creates a production build of the application and deploys to Heroku.
+
+## Technologies
+- [React](https://reactjs.org/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Heroku](https://www.heroku.com/)
 
 
 
