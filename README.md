@@ -6,7 +6,7 @@ Live demo here: https://lit-beyond-07329.herokuapp.com/
 Users can:
 * Create an account
 * Log in
-* Post and like messages
+* Post posts and like posts
 * View other user's posts and likes
 * Follow other users
 * View other user's followers and who they are folowing
