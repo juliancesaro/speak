@@ -1,6 +1,6 @@
 # Speak - A social media web app
 
-Live demo here: https://lit-beyond-07329.herokuapp.com/
+Live demo here: https://speak-web.herokuapp.com/
 
 ## Features
 Users can:
